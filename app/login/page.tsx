@@ -1,3 +1,5 @@
+import Logo from "@/components/Logo";
+
 export const dynamic = "force-dynamic";
 
 export default async function LoginPage({
@@ -10,11 +12,8 @@ export default async function LoginPage({
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <span className="w-8 h-8 rounded-lg bg-arya-blue text-white flex items-center justify-center text-base font-semibold">
-            A
-          </span>
-          <span className="text-xl font-semibold text-arya-ink tracking-tight">Arya</span>
+        <div className="flex items-center justify-center mb-6">
+          <Logo className="h-9" />
         </div>
 
         <form

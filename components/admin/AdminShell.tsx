@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "../Logo";
 
 const NAV_ITEMS = [
   { href: "/admin", label: "Resumen" },
@@ -26,11 +27,9 @@ export default function AdminShell({
     <div className="flex min-h-screen bg-slate-50">
       <aside className="w-60 shrink-0 bg-white border-r border-arya-border flex flex-col">
         <div className="h-16 flex items-center gap-2 px-5 border-b border-arya-border">
-          <span className="w-7 h-7 rounded-lg bg-arya-blue text-white flex items-center justify-center text-sm font-semibold">
-            A
-          </span>
-          <span className="text-[15px] font-semibold text-arya-ink tracking-tight">
-            Arya <span className="text-arya-muted font-normal">admin</span>
+          <Logo className="h-7" />
+          <span className="text-[11px] font-medium text-arya-muted bg-slate-100 px-1.5 py-0.5 rounded">
+            admin
           </span>
         </div>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import type { Tenant } from "@/lib/queries";
+import Logo from "./Logo";
 import {
   IconPhoneIncoming,
   IconPhoneOutgoing,
@@ -51,11 +52,8 @@ export default function AppShell({
   return (
     <div className="flex min-h-screen bg-slate-50">
       <aside className="w-60 shrink-0 bg-white border-r border-arya-border flex flex-col">
-        <div className="h-16 flex items-center gap-2 px-5 border-b border-arya-border">
-          <span className="w-7 h-7 rounded-lg bg-arya-blue text-white flex items-center justify-center text-sm font-semibold">
-            A
-          </span>
-          <span className="text-[15px] font-semibold text-arya-ink tracking-tight">Arya</span>
+        <div className="h-16 flex items-center px-5 border-b border-arya-border">
+          <Logo className="h-7" />
         </div>
 
         <nav className="flex-1 px-3 py-4 flex flex-col gap-0.5">
