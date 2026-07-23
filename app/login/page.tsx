@@ -12,15 +12,15 @@ export default async function LoginPage({
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <div className="flex items-center justify-center mb-6">
-          <Logo className="h-9" />
-        </div>
-
         <form
           action="/api/auth/login"
           method="POST"
           className="card p-6 flex flex-col gap-4"
         >
+          <div className="flex items-center justify-center mb-2">
+            <Logo className="h-9" />
+          </div>
+
           <div>
             <h1 className="text-base font-semibold text-arya-ink">Iniciar sesión</h1>
             <p className="text-sm text-arya-muted">Entra con tu correo y contraseña.</p>
