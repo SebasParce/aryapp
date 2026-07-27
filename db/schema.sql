@@ -102,3 +102,15 @@ ALTER TABLE arya_chats
   ADD COLUMN IF NOT EXISTS ai_summary TEXT,
   ADD COLUMN IF NOT EXISTS ai_next_step TEXT,
   ADD COLUMN IF NOT EXISTS sentiment TEXT;
+
+ALTER TABLE arya_appointments
+  ADD COLUMN IF NOT EXISTS customer_email TEXT,
+  ADD COLUMN IF NOT EXISTS equipment TEXT,
+  ADD COLUMN IF NOT EXISTS problem_summary TEXT,
+  ADD COLUMN IF NOT EXISTS ai_summary TEXT,
+  ADD COLUMN IF NOT EXISTS ai_next_step TEXT,
+  ADD COLUMN IF NOT EXISTS technician_notes TEXT,
+  ADD COLUMN IF NOT EXISTS source_channel TEXT,
+  ADD COLUMN IF NOT EXISTS source_call_id TEXT,
+  ADD COLUMN IF NOT EXISTS duration_min INTEGER,
+  ADD COLUMN IF NOT EXISTS priority TEXT;

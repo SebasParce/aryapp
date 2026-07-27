@@ -410,3 +410,40 @@ export async function getCustomerHistory(
     lastAppointment: appts[0]?.scheduled_at ?? null,
   };
 }
+
+export type AppointmentDetail = {
+  id: string;
+  tenant_id: string;
+  customer_name: string;
+  phone: string;
+  address: string | null;
+  service_type: string;
+  technician: string | null;
+  scheduled_at: string;
+  status: string;
+  value_usd: number | null;
+  customer_email: string | null;
+  equipment: string | null;
+  problem_summary: string | null;
+  ai_summary: string | null;
+  ai_next_step: string | null;
+  technician_notes: string | null;
+  source_channel: string | null;
+  source_call_id: string | null;
+  duration_min: number | null;
+  priority: string | null;
+};
+
+export async function getAppointmentDetail(
+  id: string
+): Promise<AppointmentDetail | undefined> {
+  const { data, error } = await supabase
+    .from("arya_appointments")
+    .select(
+      "id,tenant_id,customer_name,phone,address,service_type,technician,scheduled_at,status,value_usd,customer_email,equipment,problem_summary,ai_summary,ai_next_step,technician_notes,source_channel,source_call_id,duration_min,priority"
+    )
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return data ?? undefined;
+}

@@ -48,8 +48,13 @@ export default async function AgendamientosPage({
         <MetricCard label="Próximas citas" value={stats.upcomingCount.toString()} sublabel="en agenda" tone="info" />
       </div>
 
-      <AppointmentsTable appointments={upcoming} />
-      <AppointmentsTable appointments={past} title="Agendamientos recientes" emptyLabel="Aún no hay historial." />
+      <AppointmentsTable appointments={upcoming} tenantSlug={activeTenant.slug} />
+      <AppointmentsTable
+        appointments={past}
+        title="Agendamientos recientes"
+        emptyLabel="Aún no hay historial."
+        tenantSlug={activeTenant.slug}
+      />
     </div>
   );
 }
