@@ -41,7 +41,7 @@ export default async function LoginPage({
               name="email"
               required
               autoFocus
-              className="border border-arya-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-arya-blue/40"
+              className="border border-arya-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-arya-teal/40"
               placeholder="tu@correo.com"
             />
           </div>
@@ -52,14 +52,14 @@ export default async function LoginPage({
               type="password"
               name="password"
               required
-              className="border border-arya-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-arya-blue/40"
+              className="border border-arya-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-arya-teal/40"
               placeholder="••••••••"
             />
           </div>
 
           <button
             type="submit"
-            className="bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer"
+            className="bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer"
           >
             Entrar
           </button>

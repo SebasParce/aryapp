@@ -55,7 +55,7 @@ export default async function AdminCallsPage({
           </select>
           <input name="service_type" placeholder="Tipo de servicio" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="occurred_at" type="datetime-local" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <button type="submit" className="bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+          <button type="submit" className="bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
             Crear
           </button>
         </form>
@@ -87,7 +87,7 @@ export default async function AdminCallsPage({
                 <td className="px-4 py-2.5 text-slate-600">{c.outcome}</td>
                 <td className="px-4 py-2.5 text-slate-500">{formatDateTimeLocal(c.occurred_at).replace("T", " ")}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/calls/${c.id}/edit`} className="text-arya-blue text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/calls/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
                   <form action={deleteCallAction}>
                     <input type="hidden" name="id" value={c.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />

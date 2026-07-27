@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BucketsAi · Dashboard del contratista",
+  title: "Arya · Dashboard del contratista",
   description: "Front office con AI para contratistas de home services.",
 };
 

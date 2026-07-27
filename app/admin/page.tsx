@@ -22,7 +22,7 @@ export default async function AdminHomePage() {
         </div>
         <Link
           href="/admin/tenants"
-          className="bg-arya-blue text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-blue-700"
+          className="bg-arya-teal text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-arya-teal-dark"
         >
           Gestionar contratistas
         </Link>
@@ -64,7 +64,7 @@ export default async function AdminHomePage() {
                     <td className="px-4 py-2.5 text-slate-500">{counts.appointments}</td>
                     <td className="px-4 py-2.5 text-slate-500">{counts.retention}</td>
                     <td className="px-4 py-2.5">
-                      <Link href={`/admin/tenants/${t.id}/edit`} className="text-arya-blue text-xs hover:underline">
+                      <Link href={`/admin/tenants/${t.id}/edit`} className="text-arya-teal text-xs hover:underline">
                         Editar
                       </Link>
                     </td>

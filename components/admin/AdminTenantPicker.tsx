@@ -17,7 +17,7 @@ export default function AdminTenantPicker({
     <select
       value={activeId}
       onChange={(e) => router.push(`${pathname}?tenant=${e.target.value}`)}
-      className="bg-white border border-arya-border rounded-lg px-3 py-1.5 text-sm font-medium text-arya-ink focus:outline-none focus:ring-2 focus:ring-arya-blue/40 cursor-pointer"
+      className="bg-white border border-arya-border rounded-lg px-3 py-1.5 text-sm font-medium text-arya-ink focus:outline-none focus:ring-2 focus:ring-arya-teal/40 cursor-pointer"
     >
       {tenants.map((t) => (
         <option key={t.id} value={t.id}>

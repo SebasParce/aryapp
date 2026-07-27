@@ -35,7 +35,7 @@ export default function TranscriptView({
               <div className="min-w-0 flex-1">
                 <p
                   className={`text-[11px] font-medium mb-0.5 ${
-                    isAgent ? "text-arya-blue" : "text-slate-500"
+                    isAgent ? "text-arya-teal" : "text-slate-500"
                   }`}
                 >
                   {isAgent ? agentName : customerName}
@@ -43,7 +43,7 @@ export default function TranscriptView({
                 <p
                   className={`text-sm leading-relaxed rounded-lg px-3 py-2 ${
                     isAgent
-                      ? "bg-arya-blue-light text-arya-ink"
+                      ? "bg-arya-teal-light text-arya-ink"
                       : "bg-slate-50 text-slate-700 border border-arya-border"
                   }`}
                 >

@@ -79,7 +79,7 @@ export default function RecordingPlayer({
             if (pos >= durationSec) setPos(0);
             setPlaying((p) => !p);
           }}
-          className="w-10 h-10 shrink-0 rounded-full bg-arya-blue text-white flex items-center justify-center hover:bg-blue-700 cursor-pointer"
+          className="w-10 h-10 shrink-0 rounded-full bg-arya-teal text-white flex items-center justify-center hover:bg-arya-teal-dark cursor-pointer"
           aria-label={playing ? "Pausar" : "Reproducir"}
         >
           {playing ? (
@@ -106,7 +106,7 @@ export default function RecordingPlayer({
             <span
               key={i}
               className={`flex-1 rounded-full transition-colors ${
-                i / bars.length <= progress ? "bg-arya-blue" : "bg-slate-200"
+                i / bars.length <= progress ? "bg-arya-teal" : "bg-slate-200"
               }`}
               style={{ height: `${h * 100}%` }}
             />

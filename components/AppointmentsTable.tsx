@@ -64,7 +64,7 @@ export default function AppointmentsTable({
                 className="border-b border-arya-border last:border-0 hover:bg-slate-50 transition-colors group"
               >
                 <td className="px-4 py-2.5 text-arya-ink">
-                  <Link href={hrefFor(a.id)} className="block font-medium group-hover:text-arya-blue">
+                  <Link href={hrefFor(a.id)} className="block font-medium group-hover:text-arya-teal">
                     {a.customer_name}
                   </Link>
                 </td>
@@ -98,7 +98,7 @@ export default function AppointmentsTable({
                 <td className="px-4 py-2.5 text-right">
                   <Link
                     href={hrefFor(a.id)}
-                    className="text-slate-300 group-hover:text-arya-blue"
+                    className="text-slate-300 group-hover:text-arya-teal"
                     aria-label="Ver detalle"
                   >
                     →

@@ -13,7 +13,7 @@ export default function MetricCard({
     tone === "success"
       ? "text-emerald-600"
       : tone === "info"
-      ? "text-arya-blue"
+      ? "text-arya-teal"
       : "text-arya-muted";
 
   return (

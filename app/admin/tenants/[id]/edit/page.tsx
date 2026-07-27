@@ -39,7 +39,7 @@ export default async function EditTenantPage({
           <label className="text-xs text-slate-600">Ciudad</label>
           <input name="city" defaultValue={tenant.city} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
-        <button type="submit" className="bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+        <button type="submit" className="bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
           Guardar cambios
         </button>
       </form>

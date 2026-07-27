@@ -71,7 +71,7 @@ export default function RecentCallsTable({
                 className="border-b border-arya-border last:border-0 hover:bg-slate-50 transition-colors group"
               >
                 <td className="px-4 py-2.5 text-arya-ink">
-                  <Link href={hrefFor(c.id)} className="block font-medium group-hover:text-arya-blue">
+                  <Link href={hrefFor(c.id)} className="block font-medium group-hover:text-arya-teal">
                     {c.customer_name}
                   </Link>
                 </td>
@@ -105,7 +105,7 @@ export default function RecentCallsTable({
                 <td className="px-4 py-2.5 text-right">
                   <Link
                     href={hrefFor(c.id)}
-                    className="text-slate-300 group-hover:text-arya-blue"
+                    className="text-slate-300 group-hover:text-arya-teal"
                     aria-label="Ver detalle"
                   >
                     →

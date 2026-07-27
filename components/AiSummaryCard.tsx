@@ -17,7 +17,7 @@ export default function AiSummaryCard({
     <div className="card p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-1.5 text-sm font-medium text-arya-ink">
-          <svg viewBox="0 0 24 24" className="w-4 h-4 text-arya-blue" fill="currentColor">
+          <svg viewBox="0 0 24 24" className="w-4 h-4 text-arya-teal" fill="currentColor">
             <path d="M12 2l1.9 5.6L19.5 9l-4.4 3.4 1.4 5.6L12 15l-4.5 3 1.4-5.6L4.5 9l5.6-1.4z" />
           </svg>
           Resumen con AI

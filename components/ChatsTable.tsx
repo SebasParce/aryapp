@@ -63,15 +63,15 @@ export default function ChatsTable({
                 <td className="px-4 py-2.5">
                   <Link href={hrefFor(c.id)} className="inline-flex items-center gap-1.5 text-slate-600">
                     {c.channel === "sms" ? (
-                      <IconMessageSquare className="w-4 h-4 text-arya-blue" />
+                      <IconMessageSquare className="w-4 h-4 text-arya-teal" />
                     ) : (
-                      <IconMessageCircle className="w-4 h-4 text-arya-blue" />
+                      <IconMessageCircle className="w-4 h-4 text-arya-teal" />
                     )}
                     {c.channel === "sms" ? "SMS" : "Chat"}
                   </Link>
                 </td>
                 <td className="px-4 py-2.5 text-arya-ink">
-                  <Link href={hrefFor(c.id)} className="block font-medium group-hover:text-arya-blue">
+                  <Link href={hrefFor(c.id)} className="block font-medium group-hover:text-arya-teal">
                     {c.customer_name}
                     <span className="block text-xs font-normal text-slate-400">{c.phone}</span>
                   </Link>
@@ -106,7 +106,7 @@ export default function ChatsTable({
                 <td className="px-4 py-2.5 text-right">
                   <Link
                     href={hrefFor(c.id)}
-                    className="text-slate-300 group-hover:text-arya-blue"
+                    className="text-slate-300 group-hover:text-arya-teal"
                     aria-label="Ver detalle"
                   >
                     →

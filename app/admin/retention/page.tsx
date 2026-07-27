@@ -38,7 +38,7 @@ export default async function AdminRetentionPage({
           <input name="last_service" type="date" placeholder="Último servicio" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="equipment" placeholder="Equipo" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="notes" placeholder="Notas" className="border border-arya-border rounded-lg px-3 py-2 text-sm col-span-2" />
-          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
             Crear
           </button>
         </form>
@@ -64,7 +64,7 @@ export default async function AdminRetentionPage({
                 <td className="px-4 py-2.5 text-slate-500">{c.phone}</td>
                 <td className="px-4 py-2.5 text-slate-600">{c.equipment ?? "—"}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/retention/${c.id}/edit`} className="text-arya-blue text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/retention/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
                   <form action={deleteRetentionAction}>
                     <input type="hidden" name="id" value={c.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />

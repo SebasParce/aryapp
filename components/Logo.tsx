@@ -7,7 +7,7 @@ export default function Logo({
   return (
     <img
       src="/logo.png"
-      alt="BucketsAi"
+      alt="Arya"
       className={`${className} w-auto object-contain`}
     />
   );

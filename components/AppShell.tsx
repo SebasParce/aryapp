@@ -66,7 +66,7 @@ export default function AppShell({
                 href={withTenant(item.href)}
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
                   isActive
-                    ? "bg-arya-blue-light text-arya-blue font-medium"
+                    ? "bg-arya-teal-light text-arya-teal font-medium"
                     : "text-slate-600 hover:bg-slate-50 hover:text-arya-ink"
                 }`}
               >
@@ -83,7 +83,7 @@ export default function AppShell({
                 href="/admin"
                 className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
                   pathname.startsWith("/admin")
-                    ? "bg-arya-blue-light text-arya-blue font-medium"
+                    ? "bg-arya-teal-light text-arya-teal font-medium"
                     : "text-slate-600 hover:bg-slate-50 hover:text-arya-ink"
                 }`}
               >
@@ -129,7 +129,7 @@ export default function AppShell({
                 params.set("tenant", e.target.value);
                 router.push(`${pathname}?${params.toString()}`);
               }}
-              className="bg-white border border-arya-border rounded-lg px-3 py-1.5 text-sm font-medium text-arya-ink focus:outline-none focus:ring-2 focus:ring-arya-blue/40 cursor-pointer"
+              className="bg-white border border-arya-border rounded-lg px-3 py-1.5 text-sm font-medium text-arya-ink focus:outline-none focus:ring-2 focus:ring-arya-teal/40 cursor-pointer"
             >
               {tenants.map((t) => (
                 <option key={t.slug} value={t.slug}>

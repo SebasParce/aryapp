@@ -162,7 +162,7 @@ export default async function AppointmentDetailPage({
               </div>
               <Link
                 href={`/llamadas/${appt.source_call_id}${qs}`}
-                className="text-sm font-medium text-arya-blue hover:underline shrink-0"
+                className="text-sm font-medium text-arya-teal hover:underline shrink-0"
               >
                 Ver llamada →
               </Link>

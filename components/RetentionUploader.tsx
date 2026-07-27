@@ -30,11 +30,11 @@ export default function RetentionUploader({
       <div className="px-4 py-3 border-b border-arya-border flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium text-arya-ink">Base de retención</span>
-          <span className="badge bg-arya-blue-soft text-arya-blue">{totalCount} contactos</span>
+          <span className="badge bg-arya-teal-soft text-arya-teal">{totalCount} contactos</span>
         </div>
         <a
           href="/api/retention/sample"
-          className="text-xs text-arya-blue hover:underline flex items-center gap-1"
+          className="text-xs text-arya-teal hover:underline flex items-center gap-1"
         >
           Descargar CSV de ejemplo
         </a>
@@ -60,12 +60,12 @@ export default function RetentionUploader({
             name="file"
             accept=".csv,text/csv"
             required
-            className="text-sm text-arya-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border file:border-arya-border file:bg-arya-blue-light file:text-arya-blue file:text-sm file:font-medium file:cursor-pointer cursor-pointer"
+            className="text-sm text-arya-ink file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border file:border-arya-border file:bg-arya-teal-light file:text-arya-teal file:text-sm file:font-medium file:cursor-pointer cursor-pointer"
           />
           <button
             type="submit"
             disabled={isPending}
-            className="bg-arya-blue text-white text-sm font-medium px-4 py-1.5 rounded-lg hover:bg-blue-700 disabled:opacity-50 cursor-pointer"
+            className="bg-arya-teal text-white text-sm font-medium px-4 py-1.5 rounded-lg hover:bg-arya-teal-dark disabled:opacity-50 cursor-pointer"
           >
             {isPending ? "Subiendo..." : "Subir CSV"}
           </button>

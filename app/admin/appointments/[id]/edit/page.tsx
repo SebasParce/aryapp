@@ -69,7 +69,7 @@ export default async function EditAppointmentPage({
           <label className="text-xs text-slate-600">Fecha/hora</label>
           <input name="scheduled_at" type="datetime-local" defaultValue={toLocalInput(appt.scheduled_at)} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
-        <button type="submit" className="col-span-2 bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+        <button type="submit" className="col-span-2 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
           Guardar cambios
         </button>
       </form>

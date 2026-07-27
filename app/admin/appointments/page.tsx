@@ -49,7 +49,7 @@ export default async function AdminAppointmentsPage({
           </select>
           <input name="value_usd" type="number" placeholder="Valor USD" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="scheduled_at" type="datetime-local" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
             Crear
           </button>
         </form>
@@ -79,7 +79,7 @@ export default async function AdminAppointmentsPage({
                 <td className="px-4 py-2.5 text-slate-500">{fmt(a.scheduled_at)}</td>
                 <td className="px-4 py-2.5 text-slate-500">{a.value_usd ? `$${a.value_usd}` : "—"}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/appointments/${a.id}/edit`} className="text-arya-blue text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/appointments/${a.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
                   <form action={deleteAppointmentAction}>
                     <input type="hidden" name="id" value={a.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />

@@ -43,7 +43,7 @@ export default function AdminShell({
                 href={item.href}
                 className={`px-3 py-2 rounded-lg text-sm transition-colors ${
                   isActive
-                    ? "bg-arya-blue-light text-arya-blue font-medium"
+                    ? "bg-arya-teal-light text-arya-teal font-medium"
                     : "text-slate-600 hover:bg-slate-50 hover:text-arya-ink"
                 }`}
               >

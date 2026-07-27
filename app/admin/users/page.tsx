@@ -30,7 +30,7 @@ export default async function AdminUsersPage() {
               <option key={t.id} value={t.id}>{t.name}</option>
             ))}
           </select>
-          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-blue text-white text-sm font-medium py-2 rounded-lg hover:bg-blue-700 cursor-pointer">
+          <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
             Crear usuario
           </button>
         </form>
@@ -51,7 +51,7 @@ export default async function AdminUsersPage() {
               <tr key={u.id} className="border-b border-arya-border last:border-0">
                 <td className="px-4 py-2.5 text-arya-ink">{u.email}</td>
                 <td className="px-4 py-2.5">
-                  <span className={`badge ${u.role === "admin" ? "bg-arya-blue-soft text-arya-blue" : "bg-slate-100 text-slate-600"}`}>
+                  <span className={`badge ${u.role === "admin" ? "bg-arya-teal-soft text-arya-teal" : "bg-slate-100 text-slate-600"}`}>
                     {u.role === "admin" ? "Admin" : "Contratista"}
                   </span>
                 </td>
