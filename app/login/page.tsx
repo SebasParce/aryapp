@@ -18,7 +18,7 @@ export default async function LoginPage({
           className="card p-6 flex flex-col gap-4"
         >
           <div className="flex items-center justify-center mb-2">
-            <Logo className="h-9" />
+            <Logo className="h-10" />
           </div>
 
           <div>
