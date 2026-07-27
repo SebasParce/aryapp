@@ -1,4 +1,4 @@
-// Iconos de línea, minimalistas, sin dependencias externas.
+// Minimal line icons, no external dependencies.
 type IconProps = { className?: string };
 
 const base = {

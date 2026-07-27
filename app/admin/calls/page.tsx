@@ -40,23 +40,23 @@ export default async function AdminCallsPage({
         <form action={createCallAction} className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <input type="hidden" name="tenant_id" value={activeTenant.id} />
           <select name="direction" required className="border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="inbound">Entrante</option>
-            <option value="outbound">Saliente</option>
+            <option value="inbound">Inbound</option>
+            <option value="outbound">Outbound</option>
           </select>
           <input name="customer_name" placeholder="Cliente" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="phone" placeholder="Teléfono" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="agent_name" placeholder="Agente" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="duration_sec" type="number" placeholder="Duración (seg)" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="phone" placeholder="Phone" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="agent_name" placeholder="Agent" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="duration_sec" type="number" placeholder="Duration (sec)" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <select name="outcome" required className="border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="agendado">Agendado</option>
-            <option value="llamar_despues">Llamar después</option>
-            <option value="no_interesado">No interesado</option>
-            <option value="numero_equivocado">Número equivocado</option>
+            <option value="booked">Booked</option>
+            <option value="follow_up">Follow up</option>
+            <option value="not_interested">Not interested</option>
+            <option value="wrong_number">Wrong number</option>
           </select>
           <input name="service_type" placeholder="Tipo de servicio" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="occurred_at" type="datetime-local" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <button type="submit" className="bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-            Crear
+            Create
           </button>
         </form>
       </div>
@@ -65,11 +65,11 @@ export default async function AdminCallsPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Cliente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Dirección</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Agente</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Customer</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Direction</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Agent</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Outcome</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Fecha</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Date</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted"></th>
             </tr>
           </thead>
@@ -87,11 +87,11 @@ export default async function AdminCallsPage({
                 <td className="px-4 py-2.5 text-slate-600">{c.outcome}</td>
                 <td className="px-4 py-2.5 text-slate-500">{formatDateTimeLocal(c.occurred_at).replace("T", " ")}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/calls/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/calls/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Edit</Link>
                   <form action={deleteCallAction}>
                     <input type="hidden" name="id" value={c.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />
-                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Eliminar</button>
+                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Delete</button>
                   </form>
                 </td>
               </tr>

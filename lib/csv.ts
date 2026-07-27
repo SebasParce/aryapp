@@ -1,5 +1,5 @@
-// Parser de CSV minimalista (sin dependencias externas), soporta campos
-// entre comillas con comas y comillas escapadas ("").
+// Minimal CSV parser (no external dependencies). Supports quoted fields
+// containing commas and escaped quotes ("").
 
 export function parseCsv(text: string): string[][] {
   const rows: string[][] = [];

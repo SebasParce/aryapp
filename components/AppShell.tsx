@@ -13,11 +13,11 @@ import {
 } from "./icons";
 
 const NAV_ITEMS = [
-  { href: "/", label: "Resumen", icon: IconPhoneIncoming },
-  { href: "/llamadas-hechas", label: "Llamadas hechas", icon: IconPhoneOutgoing },
+  { href: "/", label: "Overview", icon: IconPhoneIncoming },
+  { href: "/outbound-calls", label: "Outbound calls", icon: IconPhoneOutgoing },
   { href: "/chats", label: "Chats", icon: IconMessageCircle },
-  { href: "/agendamientos", label: "Agendamientos", icon: IconCalendar },
-  { href: "/base-de-datos", label: "Cargar base de datos", icon: IconDatabase },
+  { href: "/appointments", label: "Appointments", icon: IconCalendar },
+  { href: "/database", label: "Upload database", icon: IconDatabase },
 ];
 
 type ShellUser = {
@@ -88,7 +88,7 @@ export default function AppShell({
                 }`}
               >
                 <span className="w-4 h-4 shrink-0 flex items-center justify-center text-xs">⚙</span>
-                Panel admin
+                Admin panel
               </Link>
             </>
           )}
@@ -110,7 +110,7 @@ export default function AppShell({
               type="submit"
               className="text-[11px] text-arya-muted hover:text-arya-ink underline cursor-pointer shrink-0"
             >
-              Cerrar sesión
+              Sign out
             </button>
           </form>
         </div>

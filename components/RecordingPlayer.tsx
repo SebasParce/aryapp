@@ -9,8 +9,8 @@ function fmt(sec: number): string {
 }
 
 /**
- * Reproductor de la grabación. En el demo no hay archivos de audio reales,
- * así que simula la reproducción sobre la duración real de la llamada.
+ * Call recording player. Falls back to a simulated timeline over the real
+ * call duration when no audio file is available.
  */
 export default function RecordingPlayer({
   durationSec,
@@ -49,11 +49,11 @@ export default function RecordingPlayer({
     return (
       <div className="card p-4">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-sm font-medium text-arya-ink">Grabación de la llamada</span>
-          <span className="text-xs text-arya-muted">Atendida por {agentName}</span>
+          <span className="text-sm font-medium text-arya-ink">Call recording</span>
+          <span className="text-xs text-arya-muted">Handled by {agentName}</span>
         </div>
         <audio controls preload="none" src={src} className="w-full">
-          Tu navegador no puede reproducir este audio.
+          Your browser cannot play this audio.
         </audio>
       </div>
     );
@@ -68,8 +68,8 @@ export default function RecordingPlayer({
   return (
     <div className="card p-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-sm font-medium text-arya-ink">Grabación de la llamada</span>
-        <span className="text-xs text-arya-muted">Atendida por {agentName}</span>
+        <span className="text-sm font-medium text-arya-ink">Call recording</span>
+        <span className="text-xs text-arya-muted">Handled by {agentName}</span>
       </div>
 
       <div className="flex items-center gap-3">
@@ -80,7 +80,7 @@ export default function RecordingPlayer({
             setPlaying((p) => !p);
           }}
           className="w-10 h-10 shrink-0 rounded-full bg-arya-teal text-white flex items-center justify-center hover:bg-arya-teal-dark cursor-pointer"
-          aria-label={playing ? "Pausar" : "Reproducir"}
+          aria-label={playing ? "Pause" : "Play"}
         >
           {playing ? (
             <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
@@ -127,7 +127,7 @@ export default function RecordingPlayer({
       </div>
 
       <p className="text-[11px] text-arya-muted mt-3">
-        Sin grabación disponible para esta llamada. Al sincronizar con JustCall el audio real aparece aquí.
+        No recording available for this call. Once synced with JustCall, the actual audio appears here.
       </p>
     </div>
   );

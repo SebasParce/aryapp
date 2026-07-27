@@ -24,7 +24,7 @@ export default async function EditChatPage({
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl">
-      <h1 className="text-xl font-semibold text-arya-ink">Editar chat/SMS</h1>
+      <h1 className="text-xl font-semibold text-arya-ink">Edit chat/SMS</h1>
 
       <form action={updateWithId} className="card p-4 grid grid-cols-2 gap-3">
         <div>
@@ -34,37 +34,37 @@ export default async function EditChatPage({
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Canal</label>
+          <label className="text-xs text-slate-600">Channel</label>
           <select name="channel" defaultValue={chat.channel} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm">
             <option value="chat">Chat</option>
             <option value="sms">SMS</option>
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Cliente</label>
+          <label className="text-xs text-slate-600">Customer</label>
           <input name="customer_name" defaultValue={chat.customer_name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Teléfono</label>
+          <label className="text-xs text-slate-600">Phone</label>
           <input name="phone" defaultValue={chat.phone} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Agente</label>
+          <label className="text-xs text-slate-600">Agent</label>
           <input name="agent_name" defaultValue={chat.agent_name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Estado</label>
+          <label className="text-xs text-slate-600">Status</label>
           <select name="status" defaultValue={chat.status} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="resuelto">Resuelto</option>
-            <option value="pendiente">Pendiente</option>
+            <option value="resolved">Resolved</option>
+            <option value="pending">Pending</option>
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Motivo</label>
+          <label className="text-xs text-slate-600">Reason</label>
           <input name="tag" defaultValue={chat.tag ?? ""} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="col-span-2">
-          <label className="text-xs text-slate-600">Último mensaje</label>
+          <label className="text-xs text-slate-600">Last message</label>
           <input name="last_message" defaultValue={chat.last_message ?? ""} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div className="col-span-2">
@@ -72,16 +72,16 @@ export default async function EditChatPage({
           <input name="started_at" type="datetime-local" defaultValue={toLocalInput(chat.started_at)} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <button type="submit" className="col-span-2 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-          Guardar cambios
+          Save cambios
         </button>
       </form>
 
       <form action={deleteChatAction} className="card p-4 flex items-center justify-between">
-        <p className="text-sm font-medium text-rose-600">Eliminar chat</p>
+        <p className="text-sm font-medium text-rose-600">Delete chat</p>
         <input type="hidden" name="id" value={chat.id} />
         <input type="hidden" name="tenant_id" value={chat.tenant_id} />
         <button type="submit" className="bg-rose-50 text-rose-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-rose-100 cursor-pointer">
-          Eliminar
+          Delete
         </button>
       </form>
     </div>

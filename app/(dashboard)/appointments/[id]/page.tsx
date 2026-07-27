@@ -12,15 +12,15 @@ import { getSession } from "@/lib/auth-server";
 export const dynamic = "force-dynamic";
 
 const statusStyles: Record<string, string> = {
-  confirmada: "bg-emerald-50 text-emerald-700",
-  pendiente: "bg-amber-50 text-amber-700",
-  cancelada: "bg-rose-50 text-rose-700",
+  confirmed: "bg-emerald-50 text-emerald-700",
+  pending: "bg-amber-50 text-amber-700",
+  cancelled: "bg-rose-50 text-rose-700",
 };
 
 const priorityStyles: Record<string, string> = {
-  alta: "bg-rose-50 text-rose-700",
-  media: "bg-amber-50 text-amber-700",
-  baja: "bg-slate-100 text-slate-600",
+  high: "bg-rose-50 text-rose-700",
+  medium: "bg-amber-50 text-amber-700",
+  low: "bg-slate-100 text-slate-600",
 };
 
 function Field({ label, value }: { label: string; value: string | null }) {
@@ -64,10 +64,10 @@ export default async function AppointmentDetailPage({
     <div className="flex flex-col gap-6">
       <div>
         <Link
-          href={`/agendamientos${qs}`}
+          href={`/appointments${qs}`}
           className="text-xs text-arya-muted hover:text-arya-ink inline-flex items-center gap-1 mb-2"
         >
-          ← Volver a agendamientos
+          ← Back to appointments
         </Link>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -77,15 +77,15 @@ export default async function AppointmentDetailPage({
           </span>
           {appt.priority && (
             <span className={`badge ${priorityStyles[appt.priority] ?? "bg-slate-100 text-slate-600"}`}>
-              Prioridad {appt.priority}
+              Priority {appt.priority}
             </span>
           )}
-          {isPast && <span className="badge bg-slate-100 text-slate-500">Completada</span>}
+          {isPast && <span className="badge bg-slate-100 text-slate-500">Completed</span>}
         </div>
 
         <p className="text-sm text-arya-muted mt-1">
           {tenant?.name} · {appt.service_type} ·{" "}
-          {scheduled.toLocaleString("es-US", {
+          {scheduled.toLocaleString("en-US", {
             weekday: "long",
             day: "numeric",
             month: "long",
@@ -98,27 +98,27 @@ export default async function AppointmentDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-6 min-w-0">
           <div className="card p-4 flex flex-col gap-4">
-            <span className="text-sm font-medium text-arya-ink">Detalle del servicio</span>
+            <span className="text-sm font-medium text-arya-ink">Service details</span>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              <Field label="Servicio" value={appt.service_type} />
-              <Field label="Técnico asignado" value={appt.technician} />
+              <Field label="Service" value={appt.service_type} />
+              <Field label="Assigned technician" value={appt.technician} />
               <Field
-                label="Duración estimada"
+                label="Estimated duration"
                 value={appt.duration_min ? `${appt.duration_min} min` : null}
               />
-              <Field label="Equipo" value={appt.equipment} />
+              <Field label="Equipment" value={appt.equipment} />
               <Field
-                label="Valor"
+                label="Value"
                 value={appt.value_usd ? `$${appt.value_usd.toLocaleString()}` : null}
               />
               <Field
-                label="Origen"
+                label="Source"
                 value={
                   appt.source_channel === "llamada"
-                    ? "Llamada entrante"
+                    ? "Inbound call"
                     : appt.source_channel === "chat"
-                      ? "Chat web"
+                      ? "Web chat"
                       : appt.source_channel === "sms"
                         ? "SMS"
                         : null
@@ -128,16 +128,16 @@ export default async function AppointmentDetailPage({
 
             <div className="border-t border-arya-border pt-4">
               <p className="text-[11px] font-medium text-arya-muted uppercase tracking-wide mb-1">
-                Problema reportado
+                Reported problem
               </p>
               <p className="text-sm text-slate-700 leading-relaxed">
-                {appt.problem_summary ?? "Sin detalle registrado."}
+                {appt.problem_summary ?? "No details recorded."}
               </p>
             </div>
 
             <div className="border-t border-arya-border pt-4">
               <p className="text-[11px] font-medium text-arya-muted uppercase tracking-wide mb-1">
-                Dirección de servicio
+                Service address
               </p>
               <p className="text-sm text-slate-700">{appt.address ?? "—"}</p>
             </div>
@@ -145,7 +145,7 @@ export default async function AppointmentDetailPage({
 
           {appt.technician_notes && (
             <div className="card p-4">
-              <span className="text-sm font-medium text-arya-ink">Notas del técnico</span>
+              <span className="text-sm font-medium text-arya-ink">Technician notes</span>
               <p className="text-sm text-slate-700 leading-relaxed mt-2">
                 {appt.technician_notes}
               </p>
@@ -155,16 +155,16 @@ export default async function AppointmentDetailPage({
           {appt.source_call_id && (
             <div className="card p-4 flex items-center justify-between gap-4">
               <div className="min-w-0">
-                <span className="text-sm font-medium text-arya-ink">Llamada que originó la cita</span>
+                <span className="text-sm font-medium text-arya-ink">Call that created this appointment</span>
                 <p className="text-xs text-arya-muted mt-0.5">
-                  Escucha la grabación y lee la transcripción completa.
+                  Listen to the recording and read the full transcript.
                 </p>
               </div>
               <Link
-                href={`/llamadas/${appt.source_call_id}${qs}`}
+                href={`/calls/${appt.source_call_id}${qs}`}
                 className="text-sm font-medium text-arya-teal hover:underline shrink-0"
               >
-                Ver llamada →
+                View call →
               </Link>
             </div>
           )}

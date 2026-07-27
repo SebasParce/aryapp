@@ -1,6 +1,6 @@
 import { randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
 
-// Hash de contraseñas con scrypt (node:crypto, sin dependencias externas).
+// Password hashing with scrypt (node:crypto, no external dependencies).
 // Formato guardado: "<salt-hex>:<hash-hex>"
 
 const KEY_LEN = 64;

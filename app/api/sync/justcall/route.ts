@@ -23,26 +23,26 @@ export const maxDuration = 300;
  *   Authorization: Bearer <SYNC_SECRET>
  *   { "tenantSlug": "titan-marine-air", "days": 7, "withRecordings": true }
  *
- * Es idempotente: usa `justcall_call_id` como clave única, así que se puede
- * correr en cron cuantas veces sea necesario sin duplicar registros.
+ * Idempotent: uses `justcall_call_id` as the unique key, so it can run on a
+ * cron as often as needed without duplicating records.
  */
 export async function POST(request: NextRequest) {
   const secret = process.env.SYNC_SECRET;
   const auth = request.headers.get("authorization") ?? "";
   if (!secret || auth !== `Bearer ${secret}`) {
-    return NextResponse.json({ ok: false, error: "No autorizado" }, { status: 401 });
+    return NextResponse.json({ ok: false, error: "Unauthorized" }, { status: 401 });
   }
 
   let body: { tenantSlug?: string; days?: number; withRecordings?: boolean };
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ ok: false, error: "JSON inválido" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 
   const { tenantSlug, days = 7, withRecordings = false } = body;
   if (!tenantSlug) {
-    return NextResponse.json({ ok: false, error: "Falta tenantSlug" }, { status: 400 });
+    return NextResponse.json({ ok: false, error: "Missing tenantSlug" }, { status: 400 });
   }
 
   const { data: tenant } = await supabase
@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
     .maybeSingle();
 
   if (!tenant) {
-    return NextResponse.json({ ok: false, error: "Contratista no encontrado" }, { status: 404 });
+    return NextResponse.json({ ok: false, error: "Contractor not found" }, { status: 404 });
   }
 
   const to = new Date();
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
         if (batch.length < 100) break;
       }
     } catch {
-      // La cuenta puede no tener JustCall AI contratado: seguimos sin transcripción.
+      // The account may not have JustCall AI enabled: continue without transcripts.
     }
 
     // 3. Normalizar y hacer upsert
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
       const occurredAt = toIso(jc.call_date, jc.call_time);
       const transcript = transcriptsById.get(jc.id) ?? [];
 
-      // Cliente (upsert por teléfono)
+      // Customer (upsert by phone)
       const customerId = `cus_${tenant.id}_${(jc.contact_number || "").replace(/\D/g, "")}`;
       if (jc.contact_number) {
         await supabase.from("customers").upsert(
@@ -171,7 +171,7 @@ export async function POST(request: NextRequest) {
       if (existing) updated++;
       else inserted++;
 
-      // 4. Copiar la grabación al Storage privado (opcional, es lo más lento)
+      // 4. Copy the recording into private Storage (optional, slowest step)
       if (withRecordings && jc.call_info?.recording) {
         try {
           const audio = await downloadRecording(jc.id);

@@ -27,7 +27,7 @@ export default async function AdminChatsPage({
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-arya-ink">Chats y SMS</h1>
+          <h1 className="text-xl font-semibold text-arya-ink">Chats and SMS</h1>
           <p className="text-sm text-arya-muted">{activeTenant.name}</p>
         </div>
         <AdminTenantPicker tenants={tenants} activeId={activeTenant.id} />
@@ -42,17 +42,17 @@ export default async function AdminChatsPage({
             <option value="sms">SMS</option>
           </select>
           <input name="customer_name" placeholder="Cliente" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="phone" placeholder="Teléfono" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="agent_name" placeholder="Agente" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="phone" placeholder="Phone" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="agent_name" placeholder="Agent" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <select name="status" required className="border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="resuelto">Resuelto</option>
-            <option value="pendiente">Pendiente</option>
+            <option value="resolved">Resolved</option>
+            <option value="pending">Pending</option>
           </select>
           <input name="tag" placeholder="Motivo" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="last_message" placeholder="Último mensaje" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="last_message" placeholder="Last message" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="started_at" type="datetime-local" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-            Crear
+            Create
           </button>
         </form>
       </div>
@@ -61,10 +61,10 @@ export default async function AdminChatsPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Canal</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Cliente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Estado</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Fecha</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Channel</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Customer</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Status</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Date</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted"></th>
             </tr>
           </thead>
@@ -79,11 +79,11 @@ export default async function AdminChatsPage({
                 <td className="px-4 py-2.5 text-slate-600">{c.status}</td>
                 <td className="px-4 py-2.5 text-slate-500">{fmt(c.started_at)}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/chats/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/chats/${c.id}/edit`} className="text-arya-teal text-xs hover:underline">Edit</Link>
                   <form action={deleteChatAction}>
                     <input type="hidden" name="id" value={c.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />
-                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Eliminar</button>
+                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Delete</button>
                   </form>
                 </td>
               </tr>

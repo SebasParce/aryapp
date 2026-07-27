@@ -21,7 +21,7 @@ export default async function ResumenPage({
   if (tenants.length === 0) {
     return (
       <p className="text-arya-muted text-sm">
-        No hay contratistas cargados todavía. Corre <code className="mx-1">npm run db:seed</code>.
+        No contractors loaded yet.
       </p>
     );
   }
@@ -36,20 +36,20 @@ export default async function ResumenPage({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-xl font-semibold text-arya-ink">Resumen · {activeTenant.name}</h1>
-        <p className="text-sm text-arya-muted">Últimos 30 días</p>
+        <h1 className="text-xl font-semibold text-arya-ink">Overview · {activeTenant.name}</h1>
+        <p className="text-sm text-arya-muted">Last 30 days</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <MetricCard label="Minutos hablados" value={metrics.minutesTalked.toLocaleString()} sublabel="voz total" />
+        <MetricCard label="Minutes talked" value={metrics.minutesTalked.toLocaleString()} sublabel="voz total" />
         <MetricCard
-          label="Llamadas recibidas"
+          label="Inbound calls"
           value={metrics.callsInbound.toString()}
           sublabel={inboundDelta >= 0 ? `+${inboundDelta} vs. anterior` : `${inboundDelta} vs. anterior`}
           tone="success"
         />
         <MetricCard
-          label="Llamadas hechas"
+          label="Outbound calls"
           value={metrics.callsOutbound.toString()}
           sublabel={outboundDelta >= 0 ? `+${outboundDelta} vs. anterior` : `${outboundDelta} vs. anterior`}
           tone="success"
@@ -57,17 +57,17 @@ export default async function ResumenPage({
         <MetricCard
           label="Llamadas → cita"
           value={`${metrics.conversionRate}%`}
-          sublabel="tasa de conversión"
+          sublabel="conversion rate"
           tone="info"
         />
-        <MetricCard label="Jobs agendados" value={metrics.jobsBooked.toString()} sublabel="últimos 30 días" tone="info" />
+        <MetricCard label="Jobs booked" value={metrics.jobsBooked.toString()} sublabel="last 30 days" tone="info" />
       </div>
 
       <RecentCallsTable
         calls={inboundCalls}
-        title="Llamadas recibidas"
+        title="Inbound calls"
         tenantSlug={activeTenant.slug}
-        from="recibidas"
+        from="inbound"
       />
     </div>
   );

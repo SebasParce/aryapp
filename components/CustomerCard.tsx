@@ -22,22 +22,22 @@ export default function CustomerCard({
 }) {
   return (
     <div className="card p-4 flex flex-col gap-3">
-      <span className="text-sm font-medium text-arya-ink">Datos del cliente</span>
+      <span className="text-sm font-medium text-arya-ink">Customer details</span>
 
-      <Row label="Nombre" value={name} />
-      <Row label="Teléfono" value={phone} />
-      <Row label="Correo" value={email} />
-      <Row label="Dirección de servicio" value={address} />
+      <Row label="Name" value={name} />
+      <Row label="Phone" value={phone} />
+      <Row label="Email" value={email} />
+      <Row label="Service address" value={address} />
 
       {history && (
         <div className="border-t border-arya-border pt-3">
           <p className="text-[11px] font-medium text-arya-muted uppercase tracking-wide mb-2">
-            Historial con este cliente
+            History with this customer
           </p>
           <div className="grid grid-cols-3 gap-2 text-center">
             <div>
               <p className="text-base font-semibold text-arya-ink">{history.calls}</p>
-              <p className="text-[11px] text-arya-muted">llamadas</p>
+              <p className="text-[11px] text-arya-muted">calls</p>
             </div>
             <div>
               <p className="text-base font-semibold text-arya-ink">{history.chats}</p>
@@ -45,13 +45,13 @@ export default function CustomerCard({
             </div>
             <div>
               <p className="text-base font-semibold text-arya-ink">{history.appointments}</p>
-              <p className="text-[11px] text-arya-muted">citas</p>
+              <p className="text-[11px] text-arya-muted">appointments</p>
             </div>
           </div>
           {history.lastAppointment && (
             <p className="text-[11px] text-arya-muted mt-2 text-center">
-              Última cita:{" "}
-              {new Date(history.lastAppointment).toLocaleDateString("es-US", {
+              Last appointment:{" "}
+              {new Date(history.lastAppointment).toLocaleDateString("en-US", {
                 day: "numeric",
                 month: "short",
                 year: "numeric",

@@ -1,7 +1,7 @@
 const sentimentStyles: Record<string, string> = {
-  positivo: "bg-emerald-50 text-emerald-700 border-emerald-100",
+  positive: "bg-emerald-50 text-emerald-700 border-emerald-100",
   neutral: "bg-slate-100 text-slate-600 border-slate-200",
-  negativo: "bg-rose-50 text-rose-700 border-rose-100",
+  negative: "bg-rose-50 text-rose-700 border-rose-100",
 };
 
 export default function AiSummaryCard({
@@ -20,7 +20,7 @@ export default function AiSummaryCard({
           <svg viewBox="0 0 24 24" className="w-4 h-4 text-arya-teal" fill="currentColor">
             <path d="M12 2l1.9 5.6L19.5 9l-4.4 3.4 1.4 5.6L12 15l-4.5 3 1.4-5.6L4.5 9l5.6-1.4z" />
           </svg>
-          Resumen con AI
+          AI summary
         </span>
         {sentiment && (
           <span
@@ -34,13 +34,13 @@ export default function AiSummaryCard({
       </div>
 
       <p className="text-sm text-slate-700 leading-relaxed">
-        {summary ?? "Sin resumen disponible."}
+        {summary ?? "No summary available."}
       </p>
 
       {nextStep && (
         <div className="border-t border-arya-border pt-3">
           <p className="text-[11px] font-medium text-arya-muted uppercase tracking-wide mb-1">
-            Siguiente paso sugerido
+            Suggested next step
           </p>
           <p className="text-sm text-slate-700 leading-relaxed">{nextStep}</p>
         </div>

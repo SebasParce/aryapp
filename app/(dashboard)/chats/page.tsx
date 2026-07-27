@@ -27,14 +27,14 @@ export default async function ChatsPage({
     <div className="flex flex-col gap-6">
       <div>
         <h1 className="text-xl font-semibold text-arya-ink">Chats · {activeTenant.name}</h1>
-        <p className="text-sm text-arya-muted">Conversaciones de chat y SMS — últimos 30 días</p>
+        <p className="text-sm text-arya-muted">Chat and SMS conversations — last 30 days</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <MetricCard label="Chats resueltos" value={stats.resolved.toString()} sublabel="últimos 30 días" tone="success" />
-        <MetricCard label="Chats pendientes" value={stats.pending.toString()} sublabel="por atender" />
-        <MetricCard label="SMS enviados" value={stats.smsCount.toString()} sublabel="últimos 30 días" tone="info" />
-        <MetricCard label="Tasa de resolución" value={`${stats.resolutionRate}%`} sublabel="chats + sms" tone="info" />
+        <MetricCard label="Chats resolved" value={stats.resolved.toString()} sublabel="last 30 days" tone="success" />
+        <MetricCard label="Chats pending" value={stats.pending.toString()} sublabel="awaiting reply" />
+        <MetricCard label="SMS sent" value={stats.smsCount.toString()} sublabel="last 30 days" tone="info" />
+        <MetricCard label="Resolution rate" value={`${stats.resolutionRate}%`} sublabel="chats + sms" tone="info" />
       </div>
 
       <ChatsTable chats={chats} tenantSlug={activeTenant.slug} />

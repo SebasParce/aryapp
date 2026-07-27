@@ -18,7 +18,7 @@ export default async function EditRetentionPage({
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl">
-      <h1 className="text-xl font-semibold text-arya-ink">Editar contacto de retención</h1>
+      <h1 className="text-xl font-semibold text-arya-ink">Edit retention contact</h1>
 
       <form action={updateWithId} className="card p-4 grid grid-cols-2 gap-3">
         <div>
@@ -28,11 +28,11 @@ export default async function EditRetentionPage({
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Nombre</label>
+          <label className="text-xs text-slate-600">Name</label>
           <input name="name" defaultValue={contact.name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Teléfono</label>
+          <label className="text-xs text-slate-600">Phone</label>
           <input name="phone" defaultValue={contact.phone} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
@@ -40,7 +40,7 @@ export default async function EditRetentionPage({
           <input name="email" defaultValue={contact.email ?? ""} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Dirección</label>
+          <label className="text-xs text-slate-600">Direction</label>
           <input name="address" defaultValue={contact.address ?? ""} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
@@ -56,16 +56,16 @@ export default async function EditRetentionPage({
           <input name="notes" defaultValue={contact.notes ?? ""} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <button type="submit" className="col-span-2 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-          Guardar cambios
+          Save cambios
         </button>
       </form>
 
       <form action={deleteRetentionAction} className="card p-4 flex items-center justify-between">
-        <p className="text-sm font-medium text-rose-600">Eliminar contacto</p>
+        <p className="text-sm font-medium text-rose-600">Delete contacto</p>
         <input type="hidden" name="id" value={contact.id} />
         <input type="hidden" name="tenant_id" value={contact.tenant_id} />
         <button type="submit" className="bg-rose-50 text-rose-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-rose-100 cursor-pointer">
-          Eliminar
+          Delete
         </button>
       </form>
     </div>

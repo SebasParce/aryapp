@@ -4,7 +4,7 @@ import { IconMessageCircle, IconMessageSquare } from "./icons";
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("es-US", {
+  return d.toLocaleString("en-US", {
     month: "short",
     day: "numeric",
     hour: "numeric",
@@ -13,8 +13,8 @@ function formatDateTime(iso: string): string {
 }
 
 const statusStyles: Record<string, string> = {
-  resuelto: "bg-emerald-50 text-emerald-700",
-  pendiente: "bg-amber-50 text-amber-700",
+  resolved: "bg-emerald-50 text-emerald-700",
+  pending: "bg-amber-50 text-amber-700",
 };
 
 export default function ChatsTable({
@@ -30,20 +30,20 @@ export default function ChatsTable({
   return (
     <div className="card overflow-hidden">
       <div className="px-4 py-3 border-b border-arya-border flex items-center justify-between">
-        <span className="text-sm font-medium text-arya-ink">Chats y SMS</span>
+        <span className="text-sm font-medium text-arya-ink">Chats and SMS</span>
         <span className="text-xs text-arya-muted">{chats.length}</span>
       </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Canal</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Cliente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Agente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Motivo</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Último mensaje</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Fecha</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Estado</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Channel</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Customer</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Agent</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Reason</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Last message</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Date</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Status</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted w-8"></th>
             </tr>
           </thead>
@@ -51,7 +51,7 @@ export default function ChatsTable({
             {chats.length === 0 && (
               <tr>
                 <td colSpan={8} className="px-4 py-6 text-center text-arya-muted text-sm">
-                  Aún no hay chats ni SMS registrados.
+                  No chats or SMS recorded yet.
                 </td>
               </tr>
             )}
@@ -107,7 +107,7 @@ export default function ChatsTable({
                   <Link
                     href={hrefFor(c.id)}
                     className="text-slate-300 group-hover:text-arya-teal"
-                    aria-label="Ver detalle"
+                    aria-label="View detail"
                   >
                     →
                   </Link>

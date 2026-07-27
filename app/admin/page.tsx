@@ -15,7 +15,7 @@ export default async function AdminHomePage() {
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-semibold text-arya-ink">Panel admin</h1>
+          <h1 className="text-xl font-semibold text-arya-ink">Admin panel</h1>
           <p className="text-sm text-arya-muted">
             Datos que alimentan cada dashboard de contratista
           </p>
@@ -36,12 +36,12 @@ export default async function AdminHomePage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-arya-border text-left">
-                <th className="px-4 py-2 font-normal text-xs text-arya-muted">Nombre</th>
+                <th className="px-4 py-2 font-normal text-xs text-arya-muted">Name</th>
                 <th className="px-4 py-2 font-normal text-xs text-arya-muted">Rubro</th>
                 <th className="px-4 py-2 font-normal text-xs text-arya-muted">Llamadas</th>
                 <th className="px-4 py-2 font-normal text-xs text-arya-muted">Chats</th>
                 <th className="px-4 py-2 font-normal text-xs text-arya-muted">Agendamientos</th>
-                <th className="px-4 py-2 font-normal text-xs text-arya-muted">Retención</th>
+                <th className="px-4 py-2 font-normal text-xs text-arya-muted">Retention</th>
                 <th className="px-4 py-2 font-normal text-xs text-arya-muted"></th>
               </tr>
             </thead>
@@ -49,7 +49,7 @@ export default async function AdminHomePage() {
               {tenants.length === 0 && (
                 <tr>
                   <td colSpan={7} className="px-4 py-6 text-center text-arya-muted text-sm">
-                    Aún no hay contratistas. Crea el primero.
+                    No contractors yet. Create the first one.
                   </td>
                 </tr>
               )}
@@ -65,7 +65,7 @@ export default async function AdminHomePage() {
                     <td className="px-4 py-2.5 text-slate-500">{counts.retention}</td>
                     <td className="px-4 py-2.5">
                       <Link href={`/admin/tenants/${t.id}/edit`} className="text-arya-teal text-xs hover:underline">
-                        Editar
+                        Edit
                       </Link>
                     </td>
                   </tr>

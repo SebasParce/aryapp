@@ -1,17 +1,17 @@
 import { createClient } from "@supabase/supabase-js";
 
-// Cliente de Supabase (Postgres real, proyecto compartido con fitness-tracker
-// pero en sus propias tablas `arya_*`). Server-only: la anon key se usa acá
-// porque estas tablas no tienen RLS (la app maneja su propia autenticación,
-// no Supabase Auth) — nunca se expone al cliente, todo el acceso pasa por
-// Server Components / Server Actions / Route Handlers.
+// Supabase client (real Postgres, dedicated `buckets-ai` project).
+// Server-only: the anon key is used here because these tables have no RLS
+// (the app handles its own authentication, not Supabase Auth). It is never
+// exposed to the browser — all access goes through Server Components,
+// Server Actions and Route Handlers.
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 if (!supabaseUrl || !supabaseKey) {
   throw new Error(
-    "Faltan SUPABASE_URL / SUPABASE_ANON_KEY en el entorno (revisa tu .env)."
+    "Missing SUPABASE_URL / SUPABASE_ANON_KEY in the environment (check your .env)."
   );
 }
 

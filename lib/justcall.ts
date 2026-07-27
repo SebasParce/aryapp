@@ -1,11 +1,11 @@
 /**
- * Cliente de la API de JustCall (v2.1).
+ * JustCall API client (v2.1).
  *
- * Autenticación: header `Authorization: <api_key>:<api_secret>`.
+ * Auth: `Authorization: <api_key>:<api_secret>` header.
  * Docs: https://developer.justcall.io/reference/call_list_v21
  *
- * Nota: JustCall solo expone los últimos 3 meses de historial vía API.
- * Para un export completo hay que pedirlo a su soporte.
+ * Note: JustCall only exposes the last 3 months of history over the API.
+ * A full export has to be requested from their support team.
  */
 
 const BASE = "https://api.justcall.io/v2.1";
@@ -60,7 +60,7 @@ function authHeader(): string {
   const secret = process.env.JUSTCALL_API_SECRET;
   if (!key || !secret) {
     throw new Error(
-      "Faltan JUSTCALL_API_KEY / JUSTCALL_API_SECRET en el entorno."
+      "Missing JUSTCALL_API_KEY / JUSTCALL_API_SECRET in the environment."
     );
   }
   return `${key}:${secret}`;
@@ -79,12 +79,12 @@ async function jcFetch<T>(path: string, params: Record<string, string | number |
 
   if (!res.ok) {
     const body = await res.text().catch(() => "");
-    throw new Error(`JustCall ${res.status} en ${path}: ${body.slice(0, 300)}`);
+    throw new Error(`JustCall ${res.status} on ${path}: ${body.slice(0, 300)}`);
   }
   return (await res.json()) as T;
 }
 
-/** Lista llamadas en un rango. Incluye la data de JustCall AI. */
+/** Lists calls in a date range, including JustCall AI data. */
 export async function listCalls(opts: {
   fromDatetime?: string;
   toDatetime?: string;
@@ -104,7 +104,7 @@ export async function listCalls(opts: {
   });
 }
 
-/** Data de AI (incluye la transcripción completa) para un rango de llamadas. */
+/** AI data (including the full transcript) for a range of calls. */
 export async function listCallsAi(opts: {
   fromDatetime?: string;
   toDatetime?: string;
@@ -120,52 +120,52 @@ export async function listCallsAi(opts: {
   });
 }
 
-/** Descarga el audio de la grabación para subirlo a Storage. */
+/** Downloads the recording audio so it can be uploaded to Storage. */
 export async function downloadRecording(callId: number): Promise<ArrayBuffer> {
   const res = await fetch(`${BASE}/calls/${callId}/recording/download`, {
     headers: { Authorization: authHeader() },
     cache: "no-store",
   });
   if (!res.ok) {
-    throw new Error(`No se pudo descargar la grabación de ${callId}: ${res.status}`);
+    throw new Error(`Could not download the recording for ${callId}: ${res.status}`);
   }
   return res.arrayBuffer();
 }
 
-// ---------- Normalización al modelo de BucketsAi ----------
+// ---------- Normalization into the Arya model ----------
 
-/** JustCall usa "Incoming"/"Outgoing"; nosotros inbound/outbound. */
+/** JustCall uses "Incoming"/"Outgoing"; we use inbound/outbound. */
 export function normalizeDirection(dir?: string): "inbound" | "outbound" {
   return (dir ?? "").toLowerCase().startsWith("in") ? "inbound" : "outbound";
 }
 
 /**
- * Traduce la disposición del agente en JustCall al outcome del dashboard.
- * Los códigos exactos dependen de cómo el contratista configure su lista,
- * así que se hace por palabras clave y cae en `sin_clasificar`.
+ * Maps the agent's JustCall disposition onto the dashboard outcome.
+ * The exact codes depend on how each contractor sets up their list, so this
+ * matches on keywords and falls back to `unclassified`.
  */
 export function normalizeOutcome(disposition?: string): string {
   const d = (disposition ?? "").toLowerCase();
-  if (!d) return "sin_clasificar";
-  if (/(book|agend|schedul|appointment|cita)/.test(d)) return "agendado";
-  if (/(follow|later|callback|call back|despu)/.test(d)) return "llamar_despues";
-  if (/(not interested|no interes|declin|lost)/.test(d)) return "no_interesado";
-  if (/(wrong|equivocad|spam)/.test(d)) return "numero_equivocado";
-  return "sin_clasificar";
+  if (!d) return "unclassified";
+  if (/(book|agend|schedul|appointment|cita)/.test(d)) return "booked";
+  if (/(follow|later|callback|call back|despu)/.test(d)) return "follow_up";
+  if (/(not interested|no interes|declin|lost)/.test(d)) return "not_interested";
+  if (/(wrong|equivocad|spam)/.test(d)) return "wrong_number";
+  return "unclassified";
 }
 
 export function normalizeSentiment(s?: string): string | null {
   const v = (s ?? "").toLowerCase();
   if (!v) return null;
-  if (v.startsWith("pos")) return "positivo";
-  if (v.startsWith("neg")) return "negativo";
+  if (v.startsWith("pos")) return "positive";
+  if (v.startsWith("neg")) return "negative";
   return "neutral";
 }
 
-/** Convierte la transcripción de JustCall al formato del visor. */
+/** Converts a JustCall transcript into the viewer's format. */
 export function normalizeTranscript(
   segments: JustCallAiData["transcription"]
-): Array<{ t: string; speaker: "agente" | "cliente"; text: string }> {
+): Array<{ t: string; speaker: "agent" | "customer"; text: string }> {
   if (!Array.isArray(segments)) return [];
   return segments
     .filter((s) => s?.text)
@@ -176,13 +176,13 @@ export function normalizeTranscript(
       const who = (s.speaker ?? "").toLowerCase();
       return {
         t: `${String(m).padStart(2, "0")}:${String(sec).padStart(2, "0")}`,
-        speaker: /agent|rep|user/.test(who) ? ("agente" as const) : ("cliente" as const),
+        speaker: /agent|rep|user/.test(who) ? ("agent" as const) : ("customer" as const),
         text: String(s.text),
       };
     });
 }
 
-/** JustCall entrega fecha y hora UTC por separado. */
+/** JustCall returns the UTC date and time as separate fields. */
 export function toIso(callDate: string, callTime: string): string {
   const raw = `${callDate}T${(callTime || "00:00:00").trim()}Z`;
   const d = new Date(raw);

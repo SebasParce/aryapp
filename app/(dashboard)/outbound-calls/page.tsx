@@ -27,20 +27,20 @@ export default async function LlamadasHechasPage({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-xl font-semibold text-arya-ink">Llamadas hechas · {activeTenant.name}</h1>
-        <p className="text-sm text-arya-muted">Llamadas salientes de retención y seguimiento — últimos 30 días</p>
+        <h1 className="text-xl font-semibold text-arya-ink">Outbound calls · {activeTenant.name}</h1>
+        <p className="text-sm text-arya-muted">Outbound retention and follow-up calls — last 30 days</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         <MetricCard
-          label="Llamadas hechas"
+          label="Outbound calls"
           value={stats.count.toString()}
           sublabel={delta >= 0 ? `+${delta} vs. anterior` : `${delta} vs. anterior`}
           tone="success"
         />
-        <MetricCard label="Minutos hablados" value={stats.totalMinutes.toLocaleString()} sublabel="voz saliente" />
+        <MetricCard label="Minutes talked" value={stats.totalMinutes.toLocaleString()} sublabel="voz saliente" />
         <MetricCard
-          label="Duración promedio"
+          label="Average duration"
           value={`${Math.floor(stats.avgDurationSec / 60)}:${String(stats.avgDurationSec % 60).padStart(2, "0")}`}
           sublabel="por llamada"
         />
@@ -49,9 +49,9 @@ export default async function LlamadasHechasPage({
 
       <RecentCallsTable
         calls={calls}
-        title="Llamadas hechas"
+        title="Outbound calls"
         tenantSlug={activeTenant.slug}
-        from="hechas"
+        from="outbound"
       />
     </div>
   );

@@ -17,12 +17,12 @@ export default async function AdminTenantsPage() {
       <div className="card p-4">
         <p className="text-sm font-medium text-arya-ink mb-3">Nuevo contratista</p>
         <form action={createTenantAction} className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <input name="name" placeholder="Nombre" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="name" placeholder="Name" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="slug" placeholder="slug-unico" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="trade" placeholder="Rubro (HVAC, etc.)" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="city" placeholder="Ciudad" defaultValue="South Florida" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="city" placeholder="City" defaultValue="South Florida" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-            Crear contratista
+            Create contratista
           </button>
         </form>
       </div>
@@ -31,7 +31,7 @@ export default async function AdminTenantsPage() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Nombre</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Name</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Slug</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Rubro</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Ciudad</th>
@@ -47,7 +47,7 @@ export default async function AdminTenantsPage() {
                 <td className="px-4 py-2.5 text-slate-600">{t.city}</td>
                 <td className="px-4 py-2.5">
                   <Link href={`/admin/tenants/${t.id}/edit`} className="text-arya-teal text-xs hover:underline">
-                    Editar
+                    Edit
                   </Link>
                 </td>
               </tr>

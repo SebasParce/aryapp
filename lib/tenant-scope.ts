@@ -1,8 +1,8 @@
 import type { SessionPayload } from "./session";
 import type { Tenant } from "./queries";
 
-// Un contratista siempre ve su propio tenant (ignora ?tenant= aunque lo
-// manipulen en la URL). Un admin puede navegar entre todos vía ?tenant=.
+// A contractor always sees their own tenant (?tenant= in the URL is ignored
+// even if tampered with). An admin can switch between all of them via ?tenant=.
 export function resolveActiveTenant(
   session: SessionPayload,
   tenants: Tenant[],

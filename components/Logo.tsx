@@ -1,8 +1,8 @@
 /**
  * Logo de Arya.
  *
- *   <Logo />              ícono + wordmark (sidebar, login)
- *   <Logo variant="icon" /> solo el ícono redondeado (espacios compactos)
+ *   <Logo />              icon + wordmark (sidebar, login)
+ *   <Logo variant="icon" /> rounded icon only (compact spots)
  */
 export default function Logo({
   className = "h-8",

@@ -32,27 +32,27 @@ export default async function AgendamientosPage({
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h1 className="text-xl font-semibold text-arya-ink">Agendamientos · {activeTenant.name}</h1>
-        <p className="text-sm text-arya-muted">Jobs agendados desde llamadas — últimos 30 días</p>
+        <h1 className="text-xl font-semibold text-arya-ink">Appointments · {activeTenant.name}</h1>
+        <p className="text-sm text-arya-muted">Jobs booked from calls — last 30 days</p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <MetricCard label="Jobs agendados" value={stats.jobsBooked30d.toString()} sublabel="últimos 30 días" tone="success" />
+        <MetricCard label="Jobs booked" value={stats.jobsBooked30d.toString()} sublabel="last 30 days" tone="success" />
         <MetricCard
-          label="Valor capturado"
+          label="Value captured"
           value={`$${stats.valueCaptured30d.toLocaleString()}`}
-          sublabel="últimos 30 días"
+          sublabel="last 30 days"
           tone="success"
         />
-        <MetricCard label="Ticket promedio" value={`$${stats.avgTicket.toLocaleString()}`} sublabel="por job" />
-        <MetricCard label="Próximas citas" value={stats.upcomingCount.toString()} sublabel="en agenda" tone="info" />
+        <MetricCard label="Average ticket" value={`$${stats.avgTicket.toLocaleString()}`} sublabel="per job" />
+        <MetricCard label="Upcoming appointments" value={stats.upcomingCount.toString()} sublabel="on the calendar" tone="info" />
       </div>
 
       <AppointmentsTable appointments={upcoming} tenantSlug={activeTenant.slug} />
       <AppointmentsTable
         appointments={past}
-        title="Agendamientos recientes"
-        emptyLabel="Aún no hay historial."
+        title="Recent appointments"
+        emptyLabel="No history yet."
         tenantSlug={activeTenant.slug}
       />
     </div>

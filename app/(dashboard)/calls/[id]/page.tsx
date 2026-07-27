@@ -16,17 +16,19 @@ import { getRecordingUrl } from "@/lib/recordings";
 export const dynamic = "force-dynamic";
 
 const outcomeStyles: Record<string, string> = {
-  agendado: "bg-emerald-50 text-emerald-700",
-  llamar_despues: "bg-amber-50 text-amber-700",
-  no_interesado: "bg-slate-100 text-slate-600",
-  numero_equivocado: "bg-slate-100 text-slate-500",
+  booked: "bg-emerald-50 text-emerald-700",
+  follow_up: "bg-amber-50 text-amber-700",
+  not_interested: "bg-slate-100 text-slate-600",
+  wrong_number: "bg-slate-100 text-slate-500",
+  unclassified: "bg-slate-100 text-slate-500",
 };
 
 const outcomeLabels: Record<string, string> = {
-  agendado: "Agendado",
-  llamar_despues: "Llamar después",
-  no_interesado: "No interesado",
-  numero_equivocado: "Número equivocado",
+  booked: "Booked",
+  follow_up: "Follow up",
+  not_interested: "Not interested",
+  wrong_number: "Wrong number",
+  unclassified: "Unclassified",
 };
 
 function fmtDuration(sec: number): string {
@@ -63,8 +65,8 @@ export default async function CallDetailPage({
   const recordingUrl = await getRecordingUrl(call.recording_path);
 
   const backHref =
-    sp.from === "hechas"
-      ? `/llamadas-hechas${sp.tenant ? `?tenant=${sp.tenant}` : ""}`
+    sp.from === "outbound"
+      ? `/outbound-calls${sp.tenant ? `?tenant=${sp.tenant}` : ""}`
       : `/${sp.tenant ? `?tenant=${sp.tenant}` : ""}`;
 
   const occurred = new Date(call.occurred_at);
@@ -76,7 +78,7 @@ export default async function CallDetailPage({
           href={backHref}
           className="text-xs text-arya-muted hover:text-arya-ink inline-flex items-center gap-1 mb-2"
         >
-          ← Volver a {sp.from === "hechas" ? "llamadas hechas" : "llamadas recibidas"}
+          ← Back to {sp.from === "outbound" ? "outbound calls" : "inbound calls"}
         </Link>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -92,8 +94,8 @@ export default async function CallDetailPage({
         </div>
 
         <p className="text-sm text-arya-muted mt-1">
-          {tenant?.name} · {call.service_type ?? "Sin clasificar"} ·{" "}
-          {occurred.toLocaleString("es-US", {
+          {tenant?.name} · {call.service_type ?? "Unclassified"} ·{" "}
+          {occurred.toLocaleString("en-US", {
             weekday: "long",
             day: "numeric",
             month: "long",

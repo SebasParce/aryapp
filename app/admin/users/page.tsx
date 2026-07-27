@@ -18,8 +18,8 @@ export default async function AdminUsersPage() {
       <div className="card p-4">
         <p className="text-sm font-medium text-arya-ink mb-3">Nuevo usuario</p>
         <form action={createUserAction} className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <input name="email" type="email" placeholder="Correo" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="password" type="password" placeholder="Contraseña" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="email" type="email" placeholder="Email" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="password" type="password" placeholder="Password" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <select name="role" required className="border border-arya-border rounded-lg px-3 py-2 text-sm">
             <option value="contractor">Contratista</option>
             <option value="admin">Admin</option>
@@ -31,7 +31,7 @@ export default async function AdminUsersPage() {
             ))}
           </select>
           <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-            Crear usuario
+            Create usuario
           </button>
         </form>
       </div>
@@ -40,7 +40,7 @@ export default async function AdminUsersPage() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Correo</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Email</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Rol</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Contratista</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted"></th>
@@ -59,7 +59,7 @@ export default async function AdminUsersPage() {
                 <td className="px-4 py-2.5">
                   <form action={deleteUserAction}>
                     <input type="hidden" name="id" value={u.id} />
-                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Eliminar</button>
+                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Delete</button>
                   </form>
                 </td>
               </tr>

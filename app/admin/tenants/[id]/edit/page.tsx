@@ -18,13 +18,13 @@ export default async function EditTenantPage({
   return (
     <div className="flex flex-col gap-6 max-w-xl">
       <div>
-        <h1 className="text-xl font-semibold text-arya-ink">Editar contratista</h1>
+        <h1 className="text-xl font-semibold text-arya-ink">Edit contratista</h1>
         <p className="text-sm text-arya-muted">{tenant.name}</p>
       </div>
 
       <form action={updateWithId} className="card p-4 flex flex-col gap-3">
         <div>
-          <label className="text-xs text-slate-600">Nombre</label>
+          <label className="text-xs text-slate-600">Name</label>
           <input name="name" defaultValue={tenant.name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
@@ -40,18 +40,18 @@ export default async function EditTenantPage({
           <input name="city" defaultValue={tenant.city} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <button type="submit" className="bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-          Guardar cambios
+          Save cambios
         </button>
       </form>
 
       <form action={deleteTenantAction} className="card p-4 flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-rose-600">Eliminar contratista</p>
-          <p className="text-xs text-arya-muted">Borra también sus llamadas, chats, agendamientos y retención.</p>
+          <p className="text-sm font-medium text-rose-600">Delete contratista</p>
+          <p className="text-xs text-arya-muted">This also deletes their calls, chats, appointments and retention list.</p>
         </div>
         <input type="hidden" name="id" value={tenant.id} />
         <button type="submit" className="bg-rose-50 text-rose-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-rose-100 cursor-pointer">
-          Eliminar
+          Delete
         </button>
       </form>
     </div>

@@ -25,7 +25,7 @@ export default async function EditCallPage({
 
   return (
     <div className="flex flex-col gap-6 max-w-2xl">
-      <h1 className="text-xl font-semibold text-arya-ink">Editar llamada</h1>
+      <h1 className="text-xl font-semibold text-arya-ink">Edit llamada</h1>
 
       <form action={updateWithId} className="card p-4 grid grid-cols-2 gap-3">
         <div>
@@ -37,35 +37,35 @@ export default async function EditCallPage({
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Dirección</label>
+          <label className="text-xs text-slate-600">Direction</label>
           <select name="direction" defaultValue={call.direction} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="inbound">Entrante</option>
-            <option value="outbound">Saliente</option>
+            <option value="inbound">Inbound</option>
+            <option value="outbound">Outbound</option>
           </select>
         </div>
         <div>
-          <label className="text-xs text-slate-600">Cliente</label>
+          <label className="text-xs text-slate-600">Customer</label>
           <input name="customer_name" defaultValue={call.customer_name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Teléfono</label>
+          <label className="text-xs text-slate-600">Phone</label>
           <input name="phone" defaultValue={call.phone} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Agente</label>
+          <label className="text-xs text-slate-600">Agent</label>
           <input name="agent_name" defaultValue={call.agent_name} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
-          <label className="text-xs text-slate-600">Duración (seg)</label>
+          <label className="text-xs text-slate-600">Duration (sec)</label>
           <input name="duration_sec" type="number" defaultValue={call.duration_sec} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <div>
           <label className="text-xs text-slate-600">Outcome</label>
           <select name="outcome" defaultValue={call.outcome} className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="agendado">Agendado</option>
-            <option value="llamar_despues">Llamar después</option>
-            <option value="no_interesado">No interesado</option>
-            <option value="numero_equivocado">Número equivocado</option>
+            <option value="booked">Booked</option>
+            <option value="follow_up">Follow up</option>
+            <option value="not_interested">Not interested</option>
+            <option value="wrong_number">Wrong number</option>
           </select>
         </div>
         <div>
@@ -77,16 +77,16 @@ export default async function EditCallPage({
           <input name="occurred_at" type="datetime-local" defaultValue={toLocalInput(call.occurred_at)} required className="w-full border border-arya-border rounded-lg px-3 py-2 text-sm" />
         </div>
         <button type="submit" className="col-span-2 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-          Guardar cambios
+          Save cambios
         </button>
       </form>
 
       <form action={deleteCallAction} className="card p-4 flex items-center justify-between">
-        <p className="text-sm font-medium text-rose-600">Eliminar llamada</p>
+        <p className="text-sm font-medium text-rose-600">Delete llamada</p>
         <input type="hidden" name="id" value={call.id} />
         <input type="hidden" name="tenant_id" value={call.tenant_id} />
         <button type="submit" className="bg-rose-50 text-rose-700 text-sm font-medium px-4 py-2 rounded-lg hover:bg-rose-100 cursor-pointer">
-          Eliminar
+          Delete
         </button>
       </form>
     </div>

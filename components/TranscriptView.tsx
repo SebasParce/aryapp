@@ -12,7 +12,7 @@ export default function TranscriptView({
   if (lines.length === 0) {
     return (
       <div className="card p-4">
-        <p className="text-sm text-arya-muted">No hay transcripción disponible.</p>
+        <p className="text-sm text-arya-muted">No transcript available.</p>
       </div>
     );
   }
@@ -20,13 +20,13 @@ export default function TranscriptView({
   return (
     <div className="card overflow-hidden">
       <div className="px-4 py-3 border-b border-arya-border flex items-center justify-between">
-        <span className="text-sm font-medium text-arya-ink">Transcripción</span>
-        <span className="text-xs text-arya-muted">{lines.length} intervenciones</span>
+        <span className="text-sm font-medium text-arya-ink">Transcript</span>
+        <span className="text-xs text-arya-muted">{lines.length} turns</span>
       </div>
 
       <div className="p-4 flex flex-col gap-4 max-h-[520px] overflow-y-auto">
         {lines.map((line, i) => {
-          const isAgent = line.speaker === "agente";
+          const isAgent = line.speaker === "agent";
           return (
             <div key={i} className="flex gap-3">
               <span className="text-[11px] text-slate-400 tabular-nums pt-0.5 w-11 shrink-0">

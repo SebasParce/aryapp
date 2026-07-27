@@ -2,12 +2,12 @@ import { supabase } from "./db";
 
 const BUCKET = process.env.SUPABASE_RECORDINGS_BUCKET || "recordings";
 
-/** Ruta canónica del audio dentro del bucket. */
+/** Canonical path for the audio inside the bucket. */
 export function recordingPath(tenantId: string, callId: string): string {
   return `${tenantId}/${callId}.mp3`;
 }
 
-/** Sube el audio de una llamada al bucket privado. */
+/** Uploads a call recording to the private bucket. */
 export async function uploadRecording(
   tenantId: string,
   callId: string,
@@ -23,8 +23,8 @@ export async function uploadRecording(
 }
 
 /**
- * URL firmada temporal para reproducir la grabación.
- * El bucket es privado: nunca se expone el archivo directamente.
+ * Short-lived signed URL for playing the recording.
+ * The bucket is private: the file is never exposed directly.
  */
 export async function getRecordingUrl(
   path: string | null,

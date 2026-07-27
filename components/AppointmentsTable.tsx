@@ -3,7 +3,7 @@ import type { Appointment } from "@/lib/queries";
 
 function formatDateTime(iso: string): string {
   const d = new Date(iso);
-  return d.toLocaleString("es-US", {
+  return d.toLocaleString("en-US", {
     month: "short",
     day: "numeric",
     hour: "numeric",
@@ -12,15 +12,15 @@ function formatDateTime(iso: string): string {
 }
 
 const statusStyles: Record<string, string> = {
-  confirmada: "bg-emerald-50 text-emerald-700",
-  pendiente: "bg-amber-50 text-amber-700",
-  cancelada: "bg-rose-50 text-rose-700",
+  confirmed: "bg-emerald-50 text-emerald-700",
+  pending: "bg-amber-50 text-amber-700",
+  cancelled: "bg-rose-50 text-rose-700",
 };
 
 export default function AppointmentsTable({
   appointments,
-  title = "Próximos agendamientos",
-  emptyLabel = "No hay agendamientos próximos.",
+  title = "Upcoming appointments",
+  emptyLabel = "No upcoming appointments.",
   tenantSlug,
 }: {
   appointments: Appointment[];
@@ -29,7 +29,7 @@ export default function AppointmentsTable({
   tenantSlug?: string;
 }) {
   const hrefFor = (id: string) =>
-    `/agendamientos/${id}${tenantSlug ? `?tenant=${tenantSlug}` : ""}`;
+    `/appointments/${id}${tenantSlug ? `?tenant=${tenantSlug}` : ""}`;
 
   return (
     <div className="card overflow-hidden">
@@ -41,12 +41,12 @@ export default function AppointmentsTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Cliente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Servicio</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Técnico</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Fecha</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Estado</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Valor</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Customer</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Service</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Technician</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Date</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Status</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Value</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted w-8"></th>
             </tr>
           </thead>
@@ -99,7 +99,7 @@ export default function AppointmentsTable({
                   <Link
                     href={hrefFor(a.id)}
                     className="text-slate-300 group-hover:text-arya-teal"
-                    aria-label="Ver detalle"
+                    aria-label="View detail"
                   >
                     →
                   </Link>

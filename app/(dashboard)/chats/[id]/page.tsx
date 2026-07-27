@@ -14,8 +14,8 @@ import { getSession } from "@/lib/auth-server";
 export const dynamic = "force-dynamic";
 
 const statusStyles: Record<string, string> = {
-  resuelto: "bg-emerald-50 text-emerald-700",
-  pendiente: "bg-amber-50 text-amber-700",
+  resolved: "bg-emerald-50 text-emerald-700",
+  pending: "bg-amber-50 text-amber-700",
 };
 
 export default async function ChatDetailPage({
@@ -52,7 +52,7 @@ export default async function ChatDetailPage({
           href={`/chats${sp.tenant ? `?tenant=${sp.tenant}` : ""}`}
           className="text-xs text-arya-muted hover:text-arya-ink inline-flex items-center gap-1 mb-2"
         >
-          ← Volver a chats
+          ← Back to chats
         </Link>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -61,13 +61,13 @@ export default async function ChatDetailPage({
             {chat.status}
           </span>
           <span className="badge bg-slate-100 text-slate-600">
-            {chat.channel === "sms" ? "SMS" : "Chat web"}
+            {chat.channel === "sms" ? "SMS" : "Web chat"}
           </span>
         </div>
 
         <p className="text-sm text-arya-muted mt-1">
-          {tenant?.name} · {chat.tag ?? "Sin clasificar"} ·{" "}
-          {started.toLocaleString("es-US", {
+          {tenant?.name} · {chat.tag ?? "Unclassified"} ·{" "}
+          {started.toLocaleString("en-US", {
             weekday: "long",
             day: "numeric",
             month: "long",

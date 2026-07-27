@@ -306,7 +306,7 @@ export async function countRetentionContacts(tenantId: string): Promise<number> 
 
 export type TranscriptLine = {
   t: string;
-  speaker: "agente" | "cliente";
+  speaker: "agent" | "customer";
   text: string;
 };
 
@@ -375,8 +375,8 @@ export async function getChatDetail(id: string): Promise<ChatDetail | undefined>
 }
 
 /**
- * La columna `transcript` es JSONB, así que supabase-js ya la entrega
- * como array. Se acepta también texto JSON por compatibilidad.
+ * The `transcript` column is JSONB, so supabase-js already returns it as an
+ * array. JSON text is also accepted for backward compatibility.
  */
 export function parseTranscript(raw: unknown): TranscriptLine[] {
   if (!raw) return [];
@@ -392,7 +392,7 @@ export function parseTranscript(raw: unknown): TranscriptLine[] {
   return [];
 }
 
-/** Historial del mismo cliente (por teléfono) dentro del mismo contratista. */
+/** History for the same customer (by phone) within the same contractor. */
 export async function getCustomerHistory(
   tenantId: string,
   phone: string,

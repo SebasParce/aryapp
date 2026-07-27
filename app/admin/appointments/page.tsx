@@ -38,19 +38,19 @@ export default async function AdminAppointmentsPage({
         <form action={createAppointmentAction} className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <input type="hidden" name="tenant_id" value={activeTenant.id} />
           <input name="customer_name" placeholder="Cliente" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="phone" placeholder="Teléfono" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="address" placeholder="Dirección" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="service_type" placeholder="Servicio" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
-          <input name="technician" placeholder="Técnico" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="phone" placeholder="Phone" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="address" placeholder="Address" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="service_type" placeholder="Service" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="technician" placeholder="Technician" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <select name="status" required className="border border-arya-border rounded-lg px-3 py-2 text-sm">
-            <option value="confirmada">Confirmada</option>
-            <option value="pendiente">Pendiente</option>
-            <option value="cancelada">Cancelada</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="pending">Pending</option>
+            <option value="cancelled">Cancelled</option>
           </select>
-          <input name="value_usd" type="number" placeholder="Valor USD" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
+          <input name="value_usd" type="number" placeholder="Value USD" className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <input name="scheduled_at" type="datetime-local" required className="border border-arya-border rounded-lg px-3 py-2 text-sm" />
           <button type="submit" className="col-span-2 md:col-span-4 bg-arya-teal text-white text-sm font-medium py-2 rounded-lg hover:bg-arya-teal-dark cursor-pointer">
-            Crear
+            Create
           </button>
         </form>
       </div>
@@ -59,11 +59,11 @@ export default async function AdminAppointmentsPage({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Cliente</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Servicio</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Estado</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Fecha</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Valor</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Customer</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Service</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Status</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Date</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Value</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted"></th>
             </tr>
           </thead>
@@ -79,11 +79,11 @@ export default async function AdminAppointmentsPage({
                 <td className="px-4 py-2.5 text-slate-500">{fmt(a.scheduled_at)}</td>
                 <td className="px-4 py-2.5 text-slate-500">{a.value_usd ? `$${a.value_usd}` : "—"}</td>
                 <td className="px-4 py-2.5 flex items-center gap-3">
-                  <Link href={`/admin/appointments/${a.id}/edit`} className="text-arya-teal text-xs hover:underline">Editar</Link>
+                  <Link href={`/admin/appointments/${a.id}/edit`} className="text-arya-teal text-xs hover:underline">Edit</Link>
                   <form action={deleteAppointmentAction}>
                     <input type="hidden" name="id" value={a.id} />
                     <input type="hidden" name="tenant_id" value={activeTenant.id} />
-                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Eliminar</button>
+                    <button type="submit" className="text-rose-600 text-xs hover:underline cursor-pointer">Delete</button>
                   </form>
                 </td>
               </tr>

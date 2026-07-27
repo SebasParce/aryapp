@@ -1,5 +1,5 @@
 // Carga .env a mano para scripts standalone (como db/seed.ts) que no pasan
-// por el arranque de Next.js (que ya carga .env automáticamente por su cuenta).
+// by the Next.js runtime (which loads .env automatically on its own).
 import fs from "node:fs";
 import path from "node:path";
 

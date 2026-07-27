@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import Logo from "../Logo";
 
 const NAV_ITEMS = [
-  { href: "/admin", label: "Resumen" },
-  { href: "/admin/tenants", label: "Contratistas" },
-  { href: "/admin/calls", label: "Llamadas" },
+  { href: "/admin", label: "Overview" },
+  { href: "/admin/tenants", label: "Contractors" },
+  { href: "/admin/calls", label: "Calls" },
   { href: "/admin/chats", label: "Chats" },
-  { href: "/admin/appointments", label: "Agendamientos" },
-  { href: "/admin/retention", label: "Retención" },
-  { href: "/admin/users", label: "Usuarios" },
+  { href: "/admin/appointments", label: "Appointments" },
+  { href: "/admin/retention", label: "Retention" },
+  { href: "/admin/users", label: "Users" },
 ];
 
 export default function AdminShell({
@@ -57,7 +57,7 @@ export default function AdminShell({
             href="/"
             className="px-3 py-2 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-arya-ink"
           >
-            ← Ver dashboards
+            ← View dashboards
           </Link>
         </nav>
 
@@ -68,7 +68,7 @@ export default function AdminShell({
               type="submit"
               className="text-[11px] text-arya-muted hover:text-arya-ink underline cursor-pointer shrink-0"
             >
-              Cerrar sesión
+              Sign out
             </button>
           </form>
         </div>

@@ -10,7 +10,7 @@ function formatDate(iso: string | null): string {
   if (!iso) return "—";
   const d = new Date(iso);
   if (Number.isNaN(d.getTime())) return iso;
-  return d.toLocaleDateString("es-US", { year: "numeric", month: "short", day: "numeric" });
+  return d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" });
 }
 
 export default function RetentionUploader({
@@ -29,21 +29,21 @@ export default function RetentionUploader({
     <div className="card overflow-hidden">
       <div className="px-4 py-3 border-b border-arya-border flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-sm font-medium text-arya-ink">Base de retención</span>
-          <span className="badge bg-arya-teal-soft text-arya-teal">{totalCount} contactos</span>
+          <span className="text-sm font-medium text-arya-ink">Retention list</span>
+          <span className="badge bg-arya-teal-soft text-arya-teal">{totalCount} contacts</span>
         </div>
         <a
           href="/api/retention/sample"
           className="text-xs text-arya-teal hover:underline flex items-center gap-1"
         >
-          Descargar CSV de ejemplo
+          Download sample CSV
         </a>
       </div>
 
       <div className="p-4 flex flex-col gap-3">
         <p className="text-xs text-arya-muted">
-          Sube el CSV con clientes inactivos para llamadas proactivas de retención. Columnas
-          esperadas: <span className="font-mono">nombre, telefono, email, direccion, ultimo_servicio, equipo, notas</span>.
+          Upload a CSV of inactive customers for proactive retention calls. Columns
+          expected: <span className="font-mono">name, phone, email, address, last_service, equipment, notes</span>.
         </p>
 
         <form
@@ -82,8 +82,8 @@ export default function RetentionUploader({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-arya-border text-left">
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Nombre</th>
-              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Teléfono</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Name</th>
+              <th className="px-4 py-2 font-normal text-xs text-arya-muted">Phone</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Último servicio</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Equipo</th>
               <th className="px-4 py-2 font-normal text-xs text-arya-muted">Notas</th>
@@ -93,7 +93,7 @@ export default function RetentionUploader({
             {contacts.length === 0 && (
               <tr>
                 <td colSpan={5} className="px-4 py-6 text-center text-arya-muted text-sm">
-                  Aún no hay contactos de retención cargados.
+                  No retention contacts loaded yet.
                 </td>
               </tr>
             )}

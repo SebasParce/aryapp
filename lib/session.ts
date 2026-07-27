@@ -1,8 +1,8 @@
-// Cookie de sesión firmada con Web Crypto (funciona igual en Node y en el
-// Edge Runtime de Next.js middleware — sin librerías externas, sin JWT lib).
+// Session cookie signed with Web Crypto (works the same in Node and in the
+// Next.js middleware Edge Runtime — no external libraries, no JWT lib).
 
 export const SESSION_COOKIE = "arya_session";
-const MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 días
+const MAX_AGE_SECONDS = 60 * 60 * 24 * 7; // 7 days
 
 const SECRET =
   process.env.AUTH_SECRET ||

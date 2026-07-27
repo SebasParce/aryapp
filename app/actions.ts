@@ -19,7 +19,7 @@ export async function uploadRetentionCsv(
 ): Promise<UploadResult> {
   const session = await getSession();
   if (!session) {
-    return { ok: false, message: "Tu sesión expiró. Vuelve a iniciar sesión." };
+    return { ok: false, message: "Your session expired. Please sign in again." };
   }
 
   const requestedSlug = String(formData.get("tenantSlug") ?? "");
@@ -27,17 +27,17 @@ export async function uploadRetentionCsv(
 
   const tenant = await getTenantBySlug(requestedSlug);
   if (!tenant) {
-    return { ok: false, message: "Contratista no encontrado." };
+    return { ok: false, message: "Contractor not found." };
   }
 
-  // Un contratista solo puede cargar datos de su propio tenant, sin
-  // importar lo que venga en el formulario (evita fuga entre tenants).
+  // A contractor can only upload data for their own tenant, regardless of
+  // what the form sends (prevents cross-tenant leakage).
   if (session.role === "contractor" && tenant.id !== session.tenantId) {
-    return { ok: false, message: "No tienes permiso para cargar datos de ese contratista." };
+    return { ok: false, message: "You do not have permission to upload data for that contractor." };
   }
 
   if (!(file instanceof File) || file.size === 0) {
-    return { ok: false, message: "Selecciona un archivo CSV." };
+    return { ok: false, message: "Select a CSV file." };
   }
 
   const text = await file.text();
@@ -48,7 +48,7 @@ export async function uploadRetentionCsv(
     return {
       ok: false,
       message:
-        "No se encontraron filas válidas. Verifica que el CSV tenga columnas: nombre, telefono, email, direccion, ultimo_servicio, equipo, notas.",
+        "No valid rows found. Make sure the CSV has these columns: name, phone, email, address, last_service, equipment, notes.",
     };
   }
 
@@ -66,14 +66,14 @@ export async function uploadRetentionCsv(
     }))
   );
   if (error) {
-    return { ok: false, message: `Error al guardar: ${error.message}` };
+    return { ok: false, message: `Error saving: ${error.message}` };
   }
 
-  revalidatePath("/base-de-datos");
+  revalidatePath("/database");
 
   return {
     ok: true,
-    message: `Se cargaron ${contacts.length} contactos${skipped > 0 ? ` (${skipped} filas omitidas por datos incompletos)` : ""}.`,
+    message: `Loaded ${contacts.length} contacts${skipped > 0 ? ` (${skipped} rows skipped for incomplete data)` : ""}.`,
     inserted: contacts.length,
     skipped,
   };
