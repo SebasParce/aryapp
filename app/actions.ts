@@ -52,7 +52,7 @@ export async function uploadRetentionCsv(
     };
   }
 
-  const { error } = await supabase.from("arya_retention_contacts").insert(
+  const { error } = await supabase.from("retention_contacts").insert(
     contacts.map((c) => ({
       id: newId("ret"),
       tenant_id: tenant.id,

@@ -11,6 +11,7 @@ import {
   listTenants,
 } from "@/lib/queries";
 import { getSession } from "@/lib/auth-server";
+import { getRecordingUrl } from "@/lib/recordings";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +60,7 @@ export default async function CallDetailPage({
   const tenant = tenants.find((t) => t.id === call.tenant_id);
   const history = await getCustomerHistory(call.tenant_id, call.phone, call.id);
   const lines = parseTranscript(call.transcript);
+  const recordingUrl = await getRecordingUrl(call.recording_path);
 
   const backHref =
     sp.from === "hechas"
@@ -104,7 +106,11 @@ export default async function CallDetailPage({
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 flex flex-col gap-6 min-w-0">
-          <RecordingPlayer durationSec={call.duration_sec} agentName={call.agent_name} />
+          <RecordingPlayer
+            durationSec={call.duration_sec}
+            agentName={call.agent_name}
+            src={recordingUrl}
+          />
           <TranscriptView
             lines={lines}
             agentName={call.agent_name}

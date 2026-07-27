@@ -10,7 +10,7 @@ export type Tenant = {
 
 export async function listTenants(): Promise<Tenant[]> {
   const { data, error } = await supabase
-    .from("arya_tenants")
+    .from("tenants")
     .select("id,name,slug,trade,city")
     .order("created_at", { ascending: true });
   if (error) throw error;
@@ -19,7 +19,7 @@ export async function listTenants(): Promise<Tenant[]> {
 
 export async function getTenantBySlug(slug: string): Promise<Tenant | undefined> {
   const { data, error } = await supabase
-    .from("arya_tenants")
+    .from("tenants")
     .select("id,name,slug,trade,city")
     .eq("slug", slug)
     .maybeSingle();
@@ -49,7 +49,7 @@ export async function getMetrics(tenantId: string): Promise<Metrics> {
   const cutoff60 = new Date(Date.now() - 60 * 86400000).toISOString();
 
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select("direction,duration_sec,outcome,occurred_at")
     .eq("tenant_id", tenantId)
     .gte("occurred_at", cutoff60);
@@ -88,7 +88,7 @@ export type Appointment = {
 export async function getUpcomingAppointments(tenantId: string, limit = 10): Promise<Appointment[]> {
   const cutoff = new Date(Date.now() - 86400000).toISOString();
   const { data, error } = await supabase
-    .from("arya_appointments")
+    .from("appointments")
     .select("id,customer_name,phone,address,service_type,technician,scheduled_at,status,value_usd")
     .eq("tenant_id", tenantId)
     .gte("scheduled_at", cutoff)
@@ -101,7 +101,7 @@ export async function getUpcomingAppointments(tenantId: string, limit = 10): Pro
 export async function getPastAppointments(tenantId: string, limit = 10): Promise<Appointment[]> {
   const cutoff = new Date(Date.now() - 86400000).toISOString();
   const { data, error } = await supabase
-    .from("arya_appointments")
+    .from("appointments")
     .select("id,customer_name,phone,address,service_type,technician,scheduled_at,status,value_usd")
     .eq("tenant_id", tenantId)
     .lt("scheduled_at", cutoff)
@@ -123,7 +123,7 @@ export async function getAppointmentStats(tenantId: string): Promise<Appointment
   const cutoffMinus1 = new Date(Date.now() - 86400000).toISOString();
 
   const { data, error } = await supabase
-    .from("arya_appointments")
+    .from("appointments")
     .select("scheduled_at,value_usd")
     .eq("tenant_id", tenantId)
     .gte("scheduled_at", cutoffMinus30);
@@ -157,7 +157,7 @@ export type RecentCall = {
 
 export async function getRecentCalls(tenantId: string, limit = 8): Promise<RecentCall[]> {
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select("id,direction,customer_name,agent_name,duration_sec,outcome,service_type,occurred_at")
     .eq("tenant_id", tenantId)
     .order("occurred_at", { ascending: false })
@@ -172,7 +172,7 @@ export async function getCallsByDirection(
   limit = 50
 ): Promise<RecentCall[]> {
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select("id,direction,customer_name,agent_name,duration_sec,outcome,service_type,occurred_at")
     .eq("tenant_id", tenantId)
     .eq("direction", direction)
@@ -198,7 +198,7 @@ export async function getDirectionStats(
   const cutoff60 = new Date(Date.now() - 60 * 86400000).toISOString();
 
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select("duration_sec,outcome,occurred_at")
     .eq("tenant_id", tenantId)
     .eq("direction", direction)
@@ -234,7 +234,7 @@ export type Chat = {
 
 export async function getChats(tenantId: string, limit = 50): Promise<Chat[]> {
   const { data, error } = await supabase
-    .from("arya_chats")
+    .from("chats")
     .select("id,channel,customer_name,phone,agent_name,status,tag,last_message,started_at")
     .eq("tenant_id", tenantId)
     .order("started_at", { ascending: false })
@@ -254,7 +254,7 @@ export type ChatStats = {
 export async function getChatStats(tenantId: string): Promise<ChatStats> {
   const cutoff30 = new Date(Date.now() - 30 * 86400000).toISOString();
   const { data, error } = await supabase
-    .from("arya_chats")
+    .from("chats")
     .select("channel,status")
     .eq("tenant_id", tenantId)
     .gte("started_at", cutoff30);
@@ -286,7 +286,7 @@ export type RetentionContact = {
 
 export async function getRetentionContacts(tenantId: string, limit = 12): Promise<RetentionContact[]> {
   const { data, error } = await supabase
-    .from("arya_retention_contacts")
+    .from("retention_contacts")
     .select("id,name,phone,email,address,last_service,equipment,notes")
     .eq("tenant_id", tenantId)
     .order("created_at", { ascending: false })
@@ -297,7 +297,7 @@ export async function getRetentionContacts(tenantId: string, limit = 12): Promis
 
 export async function countRetentionContacts(tenantId: string): Promise<number> {
   const { count, error } = await supabase
-    .from("arya_retention_contacts")
+    .from("retention_contacts")
     .select("id", { count: "exact", head: true })
     .eq("tenant_id", tenantId);
   if (error) throw error;
@@ -324,7 +324,8 @@ export type CallDetail = {
   customer_email: string | null;
   customer_address: string | null;
   recording_url: string | null;
-  transcript: string | null;
+  recording_path: string | null;
+  transcript: unknown;
   ai_summary: string | null;
   ai_next_step: string | null;
   sentiment: string | null;
@@ -332,9 +333,9 @@ export type CallDetail = {
 
 export async function getCallDetail(id: string): Promise<CallDetail | undefined> {
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select(
-      "id,tenant_id,direction,customer_name,phone,agent_name,duration_sec,outcome,service_type,occurred_at,customer_email,customer_address,recording_url,transcript,ai_summary,ai_next_step,sentiment"
+      "id,tenant_id,direction,customer_name,phone,agent_name,duration_sec,outcome,service_type,occurred_at,customer_email,customer_address,recording_url,recording_path,transcript,ai_summary,ai_next_step,sentiment"
     )
     .eq("id", id)
     .maybeSingle();
@@ -355,7 +356,7 @@ export type ChatDetail = {
   started_at: string;
   customer_email: string | null;
   customer_address: string | null;
-  transcript: string | null;
+  transcript: unknown;
   ai_summary: string | null;
   ai_next_step: string | null;
   sentiment: string | null;
@@ -363,7 +364,7 @@ export type ChatDetail = {
 
 export async function getChatDetail(id: string): Promise<ChatDetail | undefined> {
   const { data, error } = await supabase
-    .from("arya_chats")
+    .from("chats")
     .select(
       "id,tenant_id,channel,customer_name,phone,agent_name,status,tag,last_message,started_at,customer_email,customer_address,transcript,ai_summary,ai_next_step,sentiment"
     )
@@ -373,14 +374,22 @@ export async function getChatDetail(id: string): Promise<ChatDetail | undefined>
   return data ?? undefined;
 }
 
-export function parseTranscript(raw: string | null): TranscriptLine[] {
+/**
+ * La columna `transcript` es JSONB, así que supabase-js ya la entrega
+ * como array. Se acepta también texto JSON por compatibilidad.
+ */
+export function parseTranscript(raw: unknown): TranscriptLine[] {
   if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? (parsed as TranscriptLine[]) : [];
-  } catch {
-    return [];
+  if (Array.isArray(raw)) return raw as TranscriptLine[];
+  if (typeof raw === "string") {
+    try {
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? (parsed as TranscriptLine[]) : [];
+    } catch {
+      return [];
+    }
   }
+  return [];
 }
 
 /** Historial del mismo cliente (por teléfono) dentro del mismo contratista. */
@@ -390,10 +399,10 @@ export async function getCustomerHistory(
   excludeCallId?: string
 ): Promise<{ calls: number; chats: number; appointments: number; lastAppointment: string | null }> {
   const [callsRes, chatsRes, apptRes] = await Promise.all([
-    supabase.from("arya_calls").select("id").eq("tenant_id", tenantId).eq("phone", phone),
-    supabase.from("arya_chats").select("id").eq("tenant_id", tenantId).eq("phone", phone),
+    supabase.from("calls").select("id").eq("tenant_id", tenantId).eq("phone", phone),
+    supabase.from("chats").select("id").eq("tenant_id", tenantId).eq("phone", phone),
     supabase
-      .from("arya_appointments")
+      .from("appointments")
       .select("id,scheduled_at")
       .eq("tenant_id", tenantId)
       .eq("phone", phone)
@@ -438,7 +447,7 @@ export async function getAppointmentDetail(
   id: string
 ): Promise<AppointmentDetail | undefined> {
   const { data, error } = await supabase
-    .from("arya_appointments")
+    .from("appointments")
     .select(
       "id,tenant_id,customer_name,phone,address,service_type,technician,scheduled_at,status,value_usd,customer_email,equipment,problem_summary,ai_summary,ai_next_step,technician_notes,source_channel,source_call_id,duration_min,priority"
     )

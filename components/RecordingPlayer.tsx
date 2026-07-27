@@ -15,9 +15,12 @@ function fmt(sec: number): string {
 export default function RecordingPlayer({
   durationSec,
   agentName,
+  src,
 }: {
   durationSec: number;
   agentName: string;
+  /** URL firmada del audio. Si no hay, se muestra el reproductor simulado. */
+  src?: string | null;
 }) {
   const [playing, setPlaying] = useState(false);
   const [pos, setPos] = useState(0);
@@ -42,6 +45,20 @@ export default function RecordingPlayer({
   }, [playing, speed, durationSec]);
 
   // Barras de la onda: deterministas para que no cambien entre renders.
+  if (src) {
+    return (
+      <div className="card p-4">
+        <div className="flex items-center justify-between mb-3">
+          <span className="text-sm font-medium text-arya-ink">Grabación de la llamada</span>
+          <span className="text-xs text-arya-muted">Atendida por {agentName}</span>
+        </div>
+        <audio controls preload="none" src={src} className="w-full">
+          Tu navegador no puede reproducir este audio.
+        </audio>
+      </div>
+    );
+  }
+
   const bars = Array.from({ length: 72 }, (_, i) => {
     const seed = Math.sin(i * 12.9898) * 43758.5453;
     return 0.25 + Math.abs(seed - Math.floor(seed)) * 0.75;
@@ -110,7 +127,7 @@ export default function RecordingPlayer({
       </div>
 
       <p className="text-[11px] text-arya-muted mt-3">
-        Demo: el audio real se conecta desde el proveedor de telefonía (JustCall) en producción.
+        Sin grabación disponible para esta llamada. Al sincronizar con JustCall el audio real aparece aquí.
       </p>
     </div>
   );

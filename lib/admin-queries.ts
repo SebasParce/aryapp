@@ -10,7 +10,7 @@ export async function createTenant(input: {
   city: string;
 }): Promise<string> {
   const id = newId("ten");
-  const { error } = await supabase.from("arya_tenants").insert({ id, ...input });
+  const { error } = await supabase.from("tenants").insert({ id, ...input });
   if (error) throw error;
   return id;
 }
@@ -19,18 +19,18 @@ export async function updateTenant(
   id: string,
   input: { name: string; slug: string; trade: string; city: string }
 ) {
-  const { error } = await supabase.from("arya_tenants").update(input).eq("id", id);
+  const { error } = await supabase.from("tenants").update(input).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteTenant(id: string) {
-  const { error } = await supabase.from("arya_tenants").delete().eq("id", id);
+  const { error } = await supabase.from("tenants").delete().eq("id", id);
   if (error) throw error;
 }
 
 export async function getTenantById(id: string): Promise<Tenant | undefined> {
   const { data, error } = await supabase
-    .from("arya_tenants")
+    .from("tenants")
     .select("id,name,slug,trade,city")
     .eq("id", id)
     .maybeSingle();
@@ -56,10 +56,10 @@ async function countIn(table: string, tenantId: string): Promise<number> {
 
 export async function getTenantCounts(tenantId: string): Promise<TenantCounts> {
   const [calls, appointments, chats, retention] = await Promise.all([
-    countIn("arya_calls", tenantId),
-    countIn("arya_appointments", tenantId),
-    countIn("arya_chats", tenantId),
-    countIn("arya_retention_contacts", tenantId),
+    countIn("calls", tenantId),
+    countIn("appointments", tenantId),
+    countIn("chats", tenantId),
+    countIn("retention_contacts", tenantId),
   ]);
   return { calls, appointments, chats, retention };
 }
@@ -81,7 +81,7 @@ export type CallRow = {
 
 export async function listCallsForTenant(tenantId: string, limit = 100): Promise<CallRow[]> {
   const { data, error } = await supabase
-    .from("arya_calls")
+    .from("calls")
     .select("*")
     .eq("tenant_id", tenantId)
     .order("occurred_at", { ascending: false })
@@ -91,25 +91,25 @@ export async function listCallsForTenant(tenantId: string, limit = 100): Promise
 }
 
 export async function getCallById(id: string): Promise<CallRow | undefined> {
-  const { data, error } = await supabase.from("arya_calls").select("*").eq("id", id).maybeSingle();
+  const { data, error } = await supabase.from("calls").select("*").eq("id", id).maybeSingle();
   if (error) throw error;
   return data ?? undefined;
 }
 
 export async function createCall(input: Omit<CallRow, "id">): Promise<string> {
   const id = newId("call");
-  const { error } = await supabase.from("arya_calls").insert({ id, ...input });
+  const { error } = await supabase.from("calls").insert({ id, ...input });
   if (error) throw error;
   return id;
 }
 
 export async function updateCall(id: string, input: Omit<CallRow, "id">) {
-  const { error } = await supabase.from("arya_calls").update(input).eq("id", id);
+  const { error } = await supabase.from("calls").update(input).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteCall(id: string) {
-  const { error } = await supabase.from("arya_calls").delete().eq("id", id);
+  const { error } = await supabase.from("calls").delete().eq("id", id);
   if (error) throw error;
 }
 
@@ -130,7 +130,7 @@ export type AppointmentRow = {
 
 export async function listAppointmentsForTenant(tenantId: string, limit = 100): Promise<AppointmentRow[]> {
   const { data, error } = await supabase
-    .from("arya_appointments")
+    .from("appointments")
     .select("*")
     .eq("tenant_id", tenantId)
     .order("scheduled_at", { ascending: false })
@@ -140,25 +140,25 @@ export async function listAppointmentsForTenant(tenantId: string, limit = 100): 
 }
 
 export async function getAppointmentById(id: string): Promise<AppointmentRow | undefined> {
-  const { data, error } = await supabase.from("arya_appointments").select("*").eq("id", id).maybeSingle();
+  const { data, error } = await supabase.from("appointments").select("*").eq("id", id).maybeSingle();
   if (error) throw error;
   return data ?? undefined;
 }
 
 export async function createAppointment(input: Omit<AppointmentRow, "id">): Promise<string> {
   const id = newId("appt");
-  const { error } = await supabase.from("arya_appointments").insert({ id, ...input });
+  const { error } = await supabase.from("appointments").insert({ id, ...input });
   if (error) throw error;
   return id;
 }
 
 export async function updateAppointment(id: string, input: Omit<AppointmentRow, "id">) {
-  const { error } = await supabase.from("arya_appointments").update(input).eq("id", id);
+  const { error } = await supabase.from("appointments").update(input).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteAppointment(id: string) {
-  const { error } = await supabase.from("arya_appointments").delete().eq("id", id);
+  const { error } = await supabase.from("appointments").delete().eq("id", id);
   if (error) throw error;
 }
 
@@ -179,7 +179,7 @@ export type ChatRow = {
 
 export async function listChatsForTenant(tenantId: string, limit = 100): Promise<ChatRow[]> {
   const { data, error } = await supabase
-    .from("arya_chats")
+    .from("chats")
     .select("*")
     .eq("tenant_id", tenantId)
     .order("started_at", { ascending: false })
@@ -189,25 +189,25 @@ export async function listChatsForTenant(tenantId: string, limit = 100): Promise
 }
 
 export async function getChatById(id: string): Promise<ChatRow | undefined> {
-  const { data, error } = await supabase.from("arya_chats").select("*").eq("id", id).maybeSingle();
+  const { data, error } = await supabase.from("chats").select("*").eq("id", id).maybeSingle();
   if (error) throw error;
   return data ?? undefined;
 }
 
 export async function createChat(input: Omit<ChatRow, "id">): Promise<string> {
   const id = newId("chat");
-  const { error } = await supabase.from("arya_chats").insert({ id, ...input });
+  const { error } = await supabase.from("chats").insert({ id, ...input });
   if (error) throw error;
   return id;
 }
 
 export async function updateChat(id: string, input: Omit<ChatRow, "id">) {
-  const { error } = await supabase.from("arya_chats").update(input).eq("id", id);
+  const { error } = await supabase.from("chats").update(input).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteChat(id: string) {
-  const { error } = await supabase.from("arya_chats").delete().eq("id", id);
+  const { error } = await supabase.from("chats").delete().eq("id", id);
   if (error) throw error;
 }
 
@@ -227,7 +227,7 @@ export type RetentionRow = {
 
 export async function listRetentionForTenant(tenantId: string, limit = 100): Promise<RetentionRow[]> {
   const { data, error } = await supabase
-    .from("arya_retention_contacts")
+    .from("retention_contacts")
     .select("*")
     .eq("tenant_id", tenantId)
     .order("created_at", { ascending: false })
@@ -238,7 +238,7 @@ export async function listRetentionForTenant(tenantId: string, limit = 100): Pro
 
 export async function getRetentionById(id: string): Promise<RetentionRow | undefined> {
   const { data, error } = await supabase
-    .from("arya_retention_contacts")
+    .from("retention_contacts")
     .select("*")
     .eq("id", id)
     .maybeSingle();
@@ -248,18 +248,18 @@ export async function getRetentionById(id: string): Promise<RetentionRow | undef
 
 export async function createRetention(input: Omit<RetentionRow, "id">): Promise<string> {
   const id = newId("ret");
-  const { error } = await supabase.from("arya_retention_contacts").insert({ id, ...input });
+  const { error } = await supabase.from("retention_contacts").insert({ id, ...input });
   if (error) throw error;
   return id;
 }
 
 export async function updateRetention(id: string, input: Omit<RetentionRow, "id">) {
-  const { error } = await supabase.from("arya_retention_contacts").update(input).eq("id", id);
+  const { error } = await supabase.from("retention_contacts").update(input).eq("id", id);
   if (error) throw error;
 }
 
 export async function deleteRetention(id: string) {
-  const { error } = await supabase.from("arya_retention_contacts").delete().eq("id", id);
+  const { error } = await supabase.from("retention_contacts").delete().eq("id", id);
   if (error) throw error;
 }
 
@@ -276,11 +276,11 @@ export type UserRow = {
 export async function listUsers(): Promise<(UserRow & { tenant_name: string | null })[]> {
   const [{ data: users, error: usersErr }, tenants] = await Promise.all([
     supabase
-      .from("arya_users")
+      .from("users")
       .select("id,email,role,tenant_id,created_at")
       .order("created_at", { ascending: false }),
     (async () => {
-      const { data, error } = await supabase.from("arya_tenants").select("id,name");
+      const { data, error } = await supabase.from("tenants").select("id,name");
       if (error) throw error;
       return data ?? [];
     })(),
@@ -296,7 +296,7 @@ export async function listUsers(): Promise<(UserRow & { tenant_name: string | nu
 
 export async function getUserByEmail(email: string) {
   const { data, error } = await supabase
-    .from("arya_users")
+    .from("users")
     .select("id,email,password_hash,role,tenant_id")
     .eq("email", email)
     .maybeSingle();
@@ -311,7 +311,7 @@ export async function createUser(input: {
   tenantId: string | null;
 }): Promise<string> {
   const id = newId("usr");
-  const { error } = await supabase.from("arya_users").insert({
+  const { error } = await supabase.from("users").insert({
     id,
     email: input.email,
     password_hash: input.passwordHash,
@@ -323,6 +323,6 @@ export async function createUser(input: {
 }
 
 export async function deleteUser(id: string) {
-  const { error } = await supabase.from("arya_users").delete().eq("id", id);
+  const { error } = await supabase.from("users").delete().eq("id", id);
   if (error) throw error;
 }

@@ -9,9 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "db:seed": "tsx db/seed.ts",
-    "db:reset": "npm run db:seed"
+    "lint": "next lint"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",
