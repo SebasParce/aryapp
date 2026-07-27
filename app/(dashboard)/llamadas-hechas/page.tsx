@@ -47,7 +47,12 @@ export default async function LlamadasHechasPage({
         <MetricCard label="Tasa de agendado" value={`${stats.bookedRate}%`} sublabel="terminan en cita" tone="info" />
       </div>
 
-      <RecentCallsTable calls={calls} title="Llamadas hechas" />
+      <RecentCallsTable
+        calls={calls}
+        title="Llamadas hechas"
+        tenantSlug={activeTenant.slug}
+        from="hechas"
+      />
     </div>
   );
 }

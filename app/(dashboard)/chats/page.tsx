@@ -37,7 +37,7 @@ export default async function ChatsPage({
         <MetricCard label="Tasa de resolución" value={`${stats.resolutionRate}%`} sublabel="chats + sms" tone="info" />
       </div>
 
-      <ChatsTable chats={chats} />
+      <ChatsTable chats={chats} tenantSlug={activeTenant.slug} />
     </div>
   );
 }

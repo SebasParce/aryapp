@@ -63,7 +63,12 @@ export default async function ResumenPage({
         <MetricCard label="Jobs agendados" value={metrics.jobsBooked.toString()} sublabel="últimos 30 días" tone="info" />
       </div>
 
-      <RecentCallsTable calls={inboundCalls} title="Llamadas recibidas" />
+      <RecentCallsTable
+        calls={inboundCalls}
+        title="Llamadas recibidas"
+        tenantSlug={activeTenant.slug}
+        from="recibidas"
+      />
     </div>
   );
 }

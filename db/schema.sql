@@ -84,3 +84,21 @@ CREATE INDEX IF NOT EXISTS idx_arya_users_tenant ON arya_users(tenant_id);
 GRANT SELECT, INSERT, UPDATE, DELETE ON
   arya_tenants, arya_calls, arya_appointments, arya_chats, arya_retention_contacts, arya_users
   TO anon, authenticated;
+
+-- Detalle de llamada (grabación, transcripción, resumen AI, contacto)
+ALTER TABLE arya_calls
+  ADD COLUMN IF NOT EXISTS customer_email TEXT,
+  ADD COLUMN IF NOT EXISTS customer_address TEXT,
+  ADD COLUMN IF NOT EXISTS recording_url TEXT,
+  ADD COLUMN IF NOT EXISTS transcript TEXT,
+  ADD COLUMN IF NOT EXISTS ai_summary TEXT,
+  ADD COLUMN IF NOT EXISTS ai_next_step TEXT,
+  ADD COLUMN IF NOT EXISTS sentiment TEXT;
+
+ALTER TABLE arya_chats
+  ADD COLUMN IF NOT EXISTS customer_email TEXT,
+  ADD COLUMN IF NOT EXISTS customer_address TEXT,
+  ADD COLUMN IF NOT EXISTS transcript TEXT,
+  ADD COLUMN IF NOT EXISTS ai_summary TEXT,
+  ADD COLUMN IF NOT EXISTS ai_next_step TEXT,
+  ADD COLUMN IF NOT EXISTS sentiment TEXT;

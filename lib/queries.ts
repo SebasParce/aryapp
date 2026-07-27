@@ -303,3 +303,110 @@ export async function countRetentionContacts(tenantId: string): Promise<number> 
   if (error) throw error;
   return count ?? 0;
 }
+
+export type TranscriptLine = {
+  t: string;
+  speaker: "agente" | "cliente";
+  text: string;
+};
+
+export type CallDetail = {
+  id: string;
+  tenant_id: string;
+  direction: string;
+  customer_name: string;
+  phone: string;
+  agent_name: string;
+  duration_sec: number;
+  outcome: string;
+  service_type: string | null;
+  occurred_at: string;
+  customer_email: string | null;
+  customer_address: string | null;
+  recording_url: string | null;
+  transcript: string | null;
+  ai_summary: string | null;
+  ai_next_step: string | null;
+  sentiment: string | null;
+};
+
+export async function getCallDetail(id: string): Promise<CallDetail | undefined> {
+  const { data, error } = await supabase
+    .from("arya_calls")
+    .select(
+      "id,tenant_id,direction,customer_name,phone,agent_name,duration_sec,outcome,service_type,occurred_at,customer_email,customer_address,recording_url,transcript,ai_summary,ai_next_step,sentiment"
+    )
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return data ?? undefined;
+}
+
+export type ChatDetail = {
+  id: string;
+  tenant_id: string;
+  channel: string;
+  customer_name: string;
+  phone: string;
+  agent_name: string;
+  status: string;
+  tag: string | null;
+  last_message: string | null;
+  started_at: string;
+  customer_email: string | null;
+  customer_address: string | null;
+  transcript: string | null;
+  ai_summary: string | null;
+  ai_next_step: string | null;
+  sentiment: string | null;
+};
+
+export async function getChatDetail(id: string): Promise<ChatDetail | undefined> {
+  const { data, error } = await supabase
+    .from("arya_chats")
+    .select(
+      "id,tenant_id,channel,customer_name,phone,agent_name,status,tag,last_message,started_at,customer_email,customer_address,transcript,ai_summary,ai_next_step,sentiment"
+    )
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return data ?? undefined;
+}
+
+export function parseTranscript(raw: string | null): TranscriptLine[] {
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? (parsed as TranscriptLine[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+/** Historial del mismo cliente (por teléfono) dentro del mismo contratista. */
+export async function getCustomerHistory(
+  tenantId: string,
+  phone: string,
+  excludeCallId?: string
+): Promise<{ calls: number; chats: number; appointments: number; lastAppointment: string | null }> {
+  const [callsRes, chatsRes, apptRes] = await Promise.all([
+    supabase.from("arya_calls").select("id").eq("tenant_id", tenantId).eq("phone", phone),
+    supabase.from("arya_chats").select("id").eq("tenant_id", tenantId).eq("phone", phone),
+    supabase
+      .from("arya_appointments")
+      .select("id,scheduled_at")
+      .eq("tenant_id", tenantId)
+      .eq("phone", phone)
+      .order("scheduled_at", { ascending: false }),
+  ]);
+
+  const calls = (callsRes.data ?? []).filter((c) => c.id !== excludeCallId).length;
+  const appts = apptRes.data ?? [];
+
+  return {
+    calls,
+    chats: (chatsRes.data ?? []).length,
+    appointments: appts.length,
+    lastAppointment: appts[0]?.scheduled_at ?? null,
+  };
+}
