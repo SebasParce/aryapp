@@ -25,6 +25,7 @@ export default function RecordingPlayer({
   const [playing, setPlaying] = useState(false);
   const [pos, setPos] = useState(0);
   const [speed, setSpeed] = useState(1);
+  const [loadError, setLoadError] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
@@ -52,9 +53,26 @@ export default function RecordingPlayer({
           <span className="text-sm font-medium text-arya-ink">Call recording</span>
           <span className="text-xs text-arya-muted">Handled by {agentName}</span>
         </div>
-        <audio controls preload="none" src={src} className="w-full">
+
+        <audio
+          controls
+          preload="metadata"
+          src={src}
+          className="w-full"
+          onError={() => setLoadError(true)}
+        >
           Your browser cannot play this audio.
         </audio>
+
+        {loadError && (
+          <p className="text-[11px] text-rose-600 mt-2">
+            The recording could not be loaded.{" "}
+            <a href={src} className="underline" target="_blank" rel="noreferrer">
+              Open it in a new tab
+            </a>
+            .
+          </p>
+        )}
       </div>
     );
   }

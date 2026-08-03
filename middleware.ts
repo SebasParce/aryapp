@@ -40,9 +40,12 @@ export async function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Nota: los .mp3 NO se excluyen a propósito. Las grabaciones quedan detrás de
-// la sesión (el navegador manda la cookie en el <audio> same-origin), así que
-// no son accesibles para un anónimo que adivine la URL.
+// Static assets bypass the auth check. Anything under /public is public by
+// design in Next.js, and gating media through middleware breaks Range
+// requests from <audio>/<video>. Real call recordings are never served from
+// here: they live in the private Storage bucket behind signed URLs.
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|mp3|m4a|wav|ogg|webm)$).*)",
+  ],
 };
