@@ -37,3 +37,25 @@ export async function getRecordingUrl(
   if (error) return null;
   return data?.signedUrl ?? null;
 }
+
+/**
+ * Resolves the playable audio source for a call.
+ *
+ * Order of preference:
+ *  1. A file in the private Storage bucket (signed URL).
+ *  2. A file served by the app itself (`/recordings/...`), used for demos.
+ *  3. A direct https:// link (e.g. the recording hosted by JustCall).
+ *
+ * The `justcall://` placeholder is not playable and resolves to null.
+ */
+export async function resolveRecordingSrc(
+  recordingPath: string | null,
+  recordingUrl: string | null
+): Promise<string | null> {
+  const signed = await getRecordingUrl(recordingPath);
+  if (signed) return signed;
+  if (!recordingUrl) return null;
+  if (recordingUrl.startsWith("/")) return recordingUrl;
+  if (recordingUrl.startsWith("https://")) return recordingUrl;
+  return null;
+}

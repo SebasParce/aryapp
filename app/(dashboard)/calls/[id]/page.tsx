@@ -11,7 +11,7 @@ import {
   listTenants,
 } from "@/lib/queries";
 import { getSession } from "@/lib/auth-server";
-import { getRecordingUrl } from "@/lib/recordings";
+import { resolveRecordingSrc } from "@/lib/recordings";
 
 export const dynamic = "force-dynamic";
 
@@ -62,7 +62,7 @@ export default async function CallDetailPage({
   const tenant = tenants.find((t) => t.id === call.tenant_id);
   const history = await getCustomerHistory(call.tenant_id, call.phone, call.id);
   const lines = parseTranscript(call.transcript);
-  const recordingUrl = await getRecordingUrl(call.recording_path);
+  const recordingUrl = await resolveRecordingSrc(call.recording_path, call.recording_url);
 
   const backHref =
     sp.from === "outbound"
