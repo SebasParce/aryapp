@@ -1,0 +1,65 @@
+{
+  "id": "floridian-max-call",
+  "description": "Llamada entrante a Floridian Poodle Vet. Camila (agente) atiende a Jennifer por la cojera de su perro Max.",
+  "voices": {
+    "agent": "nova",
+    "customer": "shimmer"
+  },
+  "speed": 1.0,
+  "gap_seconds": 0.35,
+  "phone_filter": true,
+  "turns": [
+    {
+      "speaker": "agent",
+      "text": "Good afternoon, thank you for calling Floridian Poodle Vet, this is Camila speaking, how can I help you today?"
+    },
+    {
+      "speaker": "customer",
+      "text": "Hi, yeah, um, I'm a little worried about my dog. He's been limping a little on his back leg since this morning, but he's still eating and playing, so I don't think it's an emergency, but I wanted to check."
+    },
+    {
+      "speaker": "agent",
+      "text": "I completely understand wanting to get that checked out, better safe than sorry. Can I ask, is he putting any weight on it at all, or is he avoiding it completely?"
+    },
+    {
+      "speaker": "customer",
+      "text": "No, he's putting weight on it, he's just favoring it a little."
+    },
+    {
+      "speaker": "agent",
+      "text": "Okay, that's helpful to know. Since he's still eating and moving around normally, it doesn't sound like an emergency, but we definitely want a vet to take a look soon just to rule anything out. Can I get his name and yours?"
+    },
+    {
+      "speaker": "customer",
+      "text": "Yeah, it's Max, and I'm Jennifer."
+    },
+    {
+      "speaker": "agent",
+      "text": "Great, thank you Jennifer. We actually have an opening tomorrow morning at nine fifteen with Doctor Alvarez, would that work for you and Max?"
+    },
+    {
+      "speaker": "customer",
+      "text": "Yes, that's perfect, thank you so much."
+    },
+    {
+      "speaker": "agent",
+      "text": "Of course. I'll get that booked for you right now. Can I just confirm the best number to reach you at?"
+    },
+    {
+      "speaker": "customer",
+      "text": "Yeah, it's three oh five, five five five, zero one four eight."
+    },
+    {
+      "speaker": "agent",
+      "text": "Perfect, you're all set for tomorrow at nine fifteen with Doctor Alvarez. You'll get a text confirmation in a moment. Try to keep him resting tonight if you can, and we'll take good care of him tomorrow."
+    },
+    {
+      "speaker": "customer",
+      "text": "Thank you so much, I feel a lot better now."
+    },
+    {
+      "speaker": "agent",
+      "text": "Of course, that's what we're here for. See you both tomorrow, Jennifer."
+    }
+  ]
+}
